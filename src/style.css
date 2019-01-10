@@ -1,0 +1,97 @@
+:root {
+  --theme-color: #3b75cd;
+}
+
+@media (min-width: 768px) {
+  #root {
+    width: 750px;
+  }  
+}
+
+@media (min-width: 992) {
+  #root {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #root {
+    width: 1170px;
+  }
+}
+
+#taxonomy_container {
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  border: 0.75px solid lightgray;
+  align-items: center;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#taxonomy_container .center {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+#taxonomy_container .center button[type=submit] {
+  font-size: 14px;
+  line-height: 28px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-left: 5px;
+  background-color: white;
+  border: 2.5px solid black;
+}
+
+#taxonomy_container input[type=text] {
+  margin-left: auto;
+  margin-right: auto;
+  border: 2.5px solid black;
+  width: 250px;
+  font-size: 14px;
+  line-height: 28px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#taxonomy_container .col-1 {
+  display: inline-block;
+  width: 33%;
+  vertical-align: top;
+  text-align: right;
+  padding-right: 5px;
+  padding-top: 10px;
+}
+
+#taxonomy_container .col-2 {
+  display: inline-block;
+  width: 33%;
+}
+
+#taxonomy_container .col-3 {
+  display: inline-block;
+  width: 33%;
+}
+
+#taxonomy_container form input[type=checkbox] {
+  border: 2.5px solid black;
+  size: 10px;
+}
+
+#taxonomy_container pre {
+  color: red;
+  font-size: 14px;
+  padding: 4px 8px;
+  background: #f8f8f8;
+  border-radius: 5px;
+  border: 1px solid #e5e5e5;
+  overflow-x: auto;
+}
+
+.footer button {
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+}

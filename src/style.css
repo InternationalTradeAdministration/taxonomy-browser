@@ -1,7 +1,3 @@
-:root {
-  --theme-color: #3b75cd;
-}
-
 @media (min-width: 768px) {
   #root {
     width: 750px;

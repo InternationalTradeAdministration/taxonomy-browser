@@ -25,7 +25,7 @@ class Footer extends Component {
         <button onClick={this.downloadTerms}>Download Taxonomy</button>
         <p>The thesaurus is available to the software developer community as a JSON endpoint.</p>
         <p>The thesaurus was developed by ITA’s staff of international trade specialists, consulting several authoritative sources and vocabularies covering the language of international trade and investment.</p>
-        { this.state.jsonToggle ? <pre>JSON for this term</pre> : null }
+        {/* { this.state.jsonToggle ? <pre>{this.props.json}</pre> : null } */}
       </div>
     )
   }

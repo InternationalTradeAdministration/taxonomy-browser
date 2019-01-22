@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import Pagination from "react-js-pagination";
-
+import Footer from './Footer';
 class ResultsList extends Component {
   constructor(props) {
     super(props)
@@ -43,7 +43,7 @@ class ResultsList extends Component {
 
     return (
       <div className="resultsList">
-        <p>ResultsList fetched from: {this.searchUrl()}</p>
+        <h3>Search Results</h3>
         <p>{this.state.numberOfResults} results:</p>
         <ul>
           {this.state.results.map(item => {
@@ -61,6 +61,8 @@ class ResultsList extends Component {
           lastPageText="Last"
           onChange={(pageNumber) => this.handlePageChange(pageNumber)}
         />
+        <br />
+        <Footer json={this.state.results}/>
       </div>
     );
   }

@@ -15,16 +15,17 @@ class Thesauri extends Component {
         {
           name: "col-2",
           items: [
-            { name: "**Trade Topics", value: "Trade Topics", id: "RBBed4Voz7iS3nUECA3yzNM" },
             { name: "Industries", value: "Industries", id: "R79uIjoQaQ9KzvJfyB1H7Ru" },
             { name: "Countries", value: "Countries", id: "R8W91u35GBegWcXXFflYE4" },
+            { name: "World Regions", value: "World Regions", id: "R8cndKa2D8NuNg7djwJcXxB" },
           ]
         },
         {
           name: "col-3",
           items: [
-            { name: "World Regions", value: "World Regions", id: "R8cndKa2D8NuNg7djwJcXxB" },
+            
             { name: "Trade Regions", value: "Trade Regions", id: "R7ySyiNxcfeZ6bfNjhocNun" },
+            { name: "**Trade Topics/Topics", value: "Trade Topics", id: "RBBed4Voz7iS3nUECA3yzNM" },
             { name: "**US Trade Initiatives", value: "US Trade Initiatives", id: "RBqqOvJ9rXMcmc5SDhGjWTp" },
           ]
         }
@@ -139,8 +140,8 @@ class Thesauri extends Component {
             );
           })}
         </div>
-        <p><b>Are all items selected:</b> {`${AllItemsChecked}`}</p>
-        <p><b>Items selected:</b> {`${checkedListAll}`}</p>
+        {/* <p><b>Are all items selected:</b> {`${AllItemsChecked}`}</p>
+        <p><b>Items selected:</b> {`${checkedListAll}`}</p> */}
       </div>
     );
   }

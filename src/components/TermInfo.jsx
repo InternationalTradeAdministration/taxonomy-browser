@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom'; 
+import Footer from './Footer';
 
 class TermInfo extends Component {
   constructor(props) {
@@ -59,7 +60,7 @@ class TermInfo extends Component {
     return (
       <div>
         <div className="breadcrumb">
-          <small>TermInfo fetched from: {this.targetUrl()}</small>
+          {/* <small>TermInfo fetched from: {this.targetUrl()}</small> */}
           <h4><Link to={{pathname: `/`}}>ITA Thesaurus</Link> > </h4>
           {/* TODO: make the other things into links that lead to either a resultsList or a TermInfo page */}
           {type ? (<h3>{type[0]} > </h3>) : null}
@@ -120,6 +121,7 @@ class TermInfo extends Component {
                 return <li key={i}><Link to={{pathname: `/`}}>{t.label}</Link></li>
               }) ) : null }
         </div>
+        <Footer json={this.state.item}/>
       </div>
     );
   }

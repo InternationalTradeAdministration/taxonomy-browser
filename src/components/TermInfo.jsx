@@ -86,24 +86,24 @@ class TermInfo extends Component {
           <div className="broader">
             <b>Broader terms:</b>
             <ul>
-              {object_properties.has_broader ? (object_properties.has_broader.map(t => {
-                return <li key={t.id}><Link to={{pathname: `/resultsList/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
+              {object_properties.has_broader ? (object_properties.has_broader.map((t, i) => {
+                return <li key={i}><Link to={{pathname: `/resultsList/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
               }) ) : null }
             </ul>
           </div>
           <div className="related">
             <b>Related terms: </b>
             <ul>
-              {object_properties.has_related ? (object_properties.has_related.map(t => {
-                return <li key={t.id}><Link to={{pathname: `/resultsList/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
+              {object_properties.has_related ? (object_properties.has_related.map((t, i) => {
+                return <li key={i}><Link to={{pathname: `/resultsList/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
               }) ) : null}
             </ul>
           </div>
           <div className="narrower">
             <b>Narrower Terms: </b>
             <ul>
-              {object_properties.has_narrower ? (object_properties.has_narrower.map(t => {
-                return <li key={t.id}><Link to={{pathname: `/resultsList/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
+              {object_properties.has_narrower ? (object_properties.has_narrower.map((t, i) => {
+                return <li key={i}><Link to={{pathname: `/resultsList/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
               }) ) : null}
             </ul>
           </div>
@@ -111,13 +111,13 @@ class TermInfo extends Component {
           <hr />
           <b>Member of Concept Group: </b>
             <ul>
-              {type ? (type.map(t => <li>{t}</li>)) : null} {/* [TODO] these don't come with ids, need to make links manually */}
+              {type ? (type.map((t, i) => <li key={i}>{t}</li>)) : null} {/* [TODO] these don't come with ids, need to make links manually */}
             </ul>
           <br />
           <b>Top Term of: </b>
             {object_properties.is_top_concept_in_scheme ? (
-              object_properties.is_top_concept_in_scheme.map(t => {
-                return <li key={t.id}><Link to={{pathname: `/`}}>{t.label}</Link></li>
+              object_properties.is_top_concept_in_scheme.map((t, i) => {
+                return <li key={i}><Link to={{pathname: `/`}}>{t.label}</Link></li>
               }) ) : null }
         </div>
       </div>

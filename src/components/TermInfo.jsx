@@ -5,61 +5,76 @@ class TermInfo extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      item: {},
+      item: {
+        sub_class_of: [{}],
+        annotations: {},
+        object_properties: { member_of: [{}], has_related: [{}], has_broader: [{}], is_in_scheme: [{}] },
+        related_terms: {}
+      },
       errorMessage: '',
+      loading: false,
     }
   }
 
   targetUrl = () => `https://api.trade.gov/ita_taxonomies/${this.props.match.params.id}?api_key=${this.props.API_KEY}`;
 
-  componentDidMount = () => {
+  fetchData = () => {
     fetch(this.targetUrl())
       .then(response => response.json())
-      .then(response => this.setState({item: response}))
+      .then(response => this.setState({item: response, loading: false}))
       .catch(error => console.log(error), (error) => {
-        this.setState({errorMessage: error});
+        this.setState({errorMessage: error, loading: false});
       })
   }
 
-  render() {
+  componentDidMount = () => {
+    this.setState({loading: true}, () => {
+      this.fetchData();
+    })
+  }
 
-    const {
-      label,
-      sub_class_of,
-      annotations,
-      object_properties,
-    } = this.state.item;
+  render() {
+    // const {
+    //   label,
+    //   sub_class_of,
+    //   annotations,
+    //   object_properties,
+    // } = this.state.item;
 
     console.log("TermInfo fetched from: "+this.targetUrl())
     console.log(this.state.item)
-
+    console.log(this.state.item.object_properties.member_of[0].label)
     return (
       <div>
         <div>
           <p>TermInfo fetched from: {this.targetUrl()}</p>
-          {/* <h3>{`${object_properties.member_of[0].label} >`}</h3> */}
-          <h1>{label}</h1>
+          <h3>{this.state.item.object_properties.member_of[0].label}</h3>
+          <h1>{this.state.item.label}</h1>
         </div>
         
-        {/* <div className="termInfo">
+        <div className="termInfo">
           <h4>Term Information</h4>
-          <p><b>Preferred Term: </b>{annotations["Preferred Term"]}</p>
-          <p><b>Term Source: </b>{annotations["Term Source"]}</p>
+          <p><b>Preferred Term: </b>{this.state.item.annotations.pref_label}</p>
+          <p><b>Term Source: </b>{this.state.item.annotations.source}</p>
         </div>
         <div className="termRelation">
           <h4>Term Relationships</h4>
           <div className="broader">
             <b>Broader terms:</b>
-            {sub_class_of[0].label}
-            link to this term
+            {/* {this.state.item.sub_class_of[0].label} */}
+            <ul>
+              {this.state.item.sub_class_of.map(t => {
+                return <li key={t.id}><Link to={{pathname: `/resultsList/${t.id}`}}>{t.label}</Link></li>
+              })}
+            </ul>
           </div>
           <div className="related">
-            <b>Related terms: </b>
-            {object_properties["Related Terms"].forEach(term => term.label)}
+            <b>Related terms: </b> {/* find one to try this with */}
+            {/* {this.state.item.related_terms.forEach(term => term.label)} */}
           </div>
           <div className="narrower">
-            <b>Narrower Terms: </b>
-            {object_properties["Narrower Terms"].forEach(term => term.label)}
+            <b>Narrower Terms: </b> {/* find one to try this with */}
+            {/* {object_properties.narrower_terms.forEach(term => term.label)} */}
           </div>
           <hr />
 
@@ -67,7 +82,7 @@ class TermInfo extends Component {
 
           <br />
           <b>Top Term of: </b>
-        </div> */}
+        </div>
       </div>
     );
   }

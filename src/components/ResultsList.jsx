@@ -15,7 +15,11 @@ class ResultsList extends Component {
   }
 
 
-  searchUrl = () =>  (`https://api.trade.gov/ita_taxonomies/search?api_key=${this.props.API_KEY}&size=${this.state.itemsPerPage}&q=${this.props.location.state.queryString}&types=${this.props.location.state.typesChecked}&offset=${(this.state.activePage-1)*(this.state.itemsPerPage)}`);
+  searchUrl = () =>  {
+    const size = this.state.itemsPerPage;
+    const queryString = this.props.location.state.queryString;
+    const types = this.props.location.state.typesChecked;
+    return `https://api.trade.gov/ita_taxonomies/search?api_key=${this.props.API_KEY}&size=${size}&q=${queryString}&types=${types}&offset=${(this.state.activePage-1)*(size)}`};
 
   fetchResults = () => {
     console.log("ResultsList fetched from: " + this.searchUrl());
@@ -43,7 +47,7 @@ class ResultsList extends Component {
         <p>{this.state.numberOfResults} results:</p>
         <ul>
           {this.state.results.map(item => {
-            return <li key={item.id}><Link to={{pathname: `/resultsList/${item.id}`}}>{item.label}</Link></li>
+            return <li key={item.id}><Link to={{pathname: `/resultsList/${item.id}`, state: {pageId: item.id}}}>{item.label}</Link></li>
           })}
         </ul>
 

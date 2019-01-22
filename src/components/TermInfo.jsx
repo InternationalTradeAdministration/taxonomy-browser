@@ -5,6 +5,7 @@ class TermInfo extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      pageId: '',
       item: {
         sub_class_of: [{}],
         annotations: {},
@@ -16,7 +17,10 @@ class TermInfo extends Component {
     }
   }
 
-  targetUrl = () => `https://api.trade.gov/ita_taxonomies/${this.props.match.params.id}?api_key=${this.props.API_KEY}`;
+  targetUrl = () => {
+    const id =  this.props.match.params.id;
+    return `https://api.trade.gov/ita_taxonomies/${id}?api_key=${this.props.API_KEY}`;
+  };
 
   fetchData = () => {
     fetch(this.targetUrl())
@@ -33,6 +37,12 @@ class TermInfo extends Component {
     })
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      this.fetchData(this.props.match.params.id);
+    }
+  }
+
   render() {
     // const {
     //   label,
@@ -43,12 +53,17 @@ class TermInfo extends Component {
 
     console.log("TermInfo fetched from: "+this.targetUrl())
     console.log(this.state.item)
-    console.log(this.state.item.object_properties.member_of[0].label)
+
     return (
       <div>
         <div>
           <p>TermInfo fetched from: {this.targetUrl()}</p>
-          <h3>{this.state.item.object_properties.member_of[0].label}</h3>
+          {(this.state.item.member_of) ? (
+            <h3>{this.state.item.object_properties.member_of[0].label} > </h3>
+          ) : (
+            <h3>{this.state.item.object_properties.has_broader[0].label} > </h3>
+          )}
+          
           <h1>{this.state.item.label}</h1>
         </div>
         
@@ -61,10 +76,9 @@ class TermInfo extends Component {
           <h4>Term Relationships</h4>
           <div className="broader">
             <b>Broader terms:</b>
-            {/* {this.state.item.sub_class_of[0].label} */}
             <ul>
               {this.state.item.sub_class_of.map(t => {
-                return <li key={t.id}><Link to={{pathname: `/resultsList/${t.id}`}}>{t.label}</Link></li>
+                return <li key={t.id}><Link to={{pathname: `/resultsList/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
               })}
             </ul>
           </div>

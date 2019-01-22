@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import ResultsList from './ResultsList';
 import TermInfo from './TermInfo';
 import Footer from './Footer';
@@ -23,7 +23,7 @@ class App extends Component {
         <Route exact path="/resultsList" render={(props) => <ResultsList {...props} API_KEY={this.props.API_KEY} />} />
         {/*from the Thesauri component*/}
 
-        <Route exact path="/resultsList/:id" render={(props) => <TermInfo {...props} API_KEY={this.props.API_KEY} />} />
+        <Route exact path="/resultsList/:id" render={(props) => <TermInfo {...props} API_KEY={this.props.API_KEY} location={props.location} />} />
         {/* from the ResultsList or another instance of TermInfo */}
 
         <Footer json={this.state.json} />
@@ -32,4 +32,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

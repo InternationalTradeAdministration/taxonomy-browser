@@ -165,18 +165,22 @@
   padding-left: 0;
 }
 
-hr {
+#taxonomy_container hr {
   border: none;
   height: 3px;
   background-color: #94afbf;
   box-shadow: 0 1px 1px 0 gray;
 }
 
-#arrow {
+#taxonomy_container .termRelation img {
+  margin-top: 10px;
+}
+
+/* #arrow {
   margin: 0;
 	border-color: transparent #94afbf;
 	border-style: solid;
 	border-width: 8px 0px 8px 10px;
 	height: 0px;
 	width: 0px;
-}
+} */

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom'; 
+import arrow from '../Right_Arrow.png';
 import Footer from './Footer';
 
 class TermInfo extends Component {
@@ -55,24 +56,24 @@ class TermInfo extends Component {
     } = this.state.item;
 
     console.log("TermInfo fetched from: "+this.targetUrl())
-    // console.log(this.state.item)
+    console.log(this.state.item)
 
     return (
       <div>
         <div className="breadcrumb">
-          {/* <small>TermInfo fetched from: {this.targetUrl()}</small> */}
+
           <h4><Link to={{pathname: `/`}}>ITA Thesaurus</Link> > </h4>
-          {/* TODO: make the other things into links that lead to either a resultsList or a TermInfo page */}
-          {type ? (<h3>{type[0]} > </h3>) : null}
+
+          {type ? (<h3>{type[0]} > </h3>) : null} {/* [TODO] this doesn't come with an id, need to make a link manually */}
 
           {(object_properties.member_of) ? (
             <h3>{object_properties.member_of[0].label} > </h3>
           ) : (
             <h3>{sub_class_of[0].label} > </h3>
-          )}
-          {/* <h3>{object_properties.has_broader[0].label} > </h3> */}
+          )}                              {/* [TODO] add links */}
 
           <h1>{label}</h1>
+
         </div>
         <div className="termInfo">
           <span><h3>Term Information</h3></span>
@@ -92,7 +93,7 @@ class TermInfo extends Component {
             </ul>
           </div>
           
-          <div id="arrow"></div>
+          <img src={arrow} alt="arrow pointing right"/>
 
           <div className="related">
             <b><p>Related terms: </p></b>
@@ -103,7 +104,7 @@ class TermInfo extends Component {
             </ul>
           </div>
 
-          <div id="arrow"></div>
+          <img src={arrow} alt="arrow pointing right"/>
 
           <div className="narrower">
             <b><p>Narrower Terms: </p></b>

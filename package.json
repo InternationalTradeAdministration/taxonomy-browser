@@ -31,5 +31,5 @@
   "devDependencies": {
     "gh-pages": "^2.0.1"
   },
-  "homepage": "."
+  "homepage" : "http://myname.github.io/myapp"
 }

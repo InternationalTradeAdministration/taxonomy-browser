@@ -1,13 +1,13 @@
 {
-  "main.css": "/myapp/static/css/main.0518daa7.chunk.css",
-  "main.js": "/myapp/static/js/main.9806c818.chunk.js",
-  "main.js.map": "/myapp/static/js/main.9806c818.chunk.js.map",
-  "static/js/1.18855cdf.chunk.js": "/myapp/static/js/1.18855cdf.chunk.js",
-  "static/js/1.18855cdf.chunk.js.map": "/myapp/static/js/1.18855cdf.chunk.js.map",
-  "runtime~main.js": "/myapp/static/js/runtime~main.8dd91205.js",
-  "runtime~main.js.map": "/myapp/static/js/runtime~main.8dd91205.js.map",
-  "static/css/main.0518daa7.chunk.css.map": "/myapp/static/css/main.0518daa7.chunk.css.map",
-  "index.html": "/myapp/index.html",
-  "precache-manifest.d16f8e03220f95e8d9f6aafebb83dd9f.js": "/myapp/precache-manifest.d16f8e03220f95e8d9f6aafebb83dd9f.js",
-  "service-worker.js": "/myapp/service-worker.js"
+  "main.css": "/taxonomy-browser/static/css/main.0518daa7.chunk.css",
+  "main.js": "/taxonomy-browser/static/js/main.46e958ed.chunk.js",
+  "main.js.map": "/taxonomy-browser/static/js/main.46e958ed.chunk.js.map",
+  "static/js/1.18855cdf.chunk.js": "/taxonomy-browser/static/js/1.18855cdf.chunk.js",
+  "static/js/1.18855cdf.chunk.js.map": "/taxonomy-browser/static/js/1.18855cdf.chunk.js.map",
+  "runtime~main.js": "/taxonomy-browser/static/js/runtime~main.a36e0160.js",
+  "runtime~main.js.map": "/taxonomy-browser/static/js/runtime~main.a36e0160.js.map",
+  "static/css/main.0518daa7.chunk.css.map": "/taxonomy-browser/static/css/main.0518daa7.chunk.css.map",
+  "index.html": "/taxonomy-browser/index.html",
+  "precache-manifest.a8d9054dfa1b8c964ba57fef9d3ea853.js": "/taxonomy-browser/precache-manifest.a8d9054dfa1b8c964ba57fef9d3ea853.js",
+  "service-worker.js": "/taxonomy-browser/service-worker.js"
 }

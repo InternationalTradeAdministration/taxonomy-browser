@@ -1,4 +1,4 @@
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   #root {
     width: 750px;
   }  
@@ -8,13 +8,19 @@
   #root {
     width: 970px;
   }
-}
+} 
 
 @media (min-width: 1200px) {
   #root {
     width: 1170px;
   }
-}
+} */
+
+/* @media (min-width: 1040px) { */
+  #root {
+    width: 1040px;
+  }
+/* } */
 
 #taxonomy_container {
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -116,6 +122,10 @@
   overflow-x: auto;
 }
 
+.footer {
+  margin-top: 20px;
+}
+
 .footer button {
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -131,7 +141,7 @@
   margin: 25px 20px 20px auto;
 }
 
-#taxonomy_container .breadcrumb h1, h3, h4 {
+#taxonomy_container .breadcrumb h1, h2, h3, h4 {
   display: inline;
 }
 
@@ -158,12 +168,17 @@
 #taxonomy_container .termRelation div {
   display: inline-block;
   vertical-align: top;
-  margin: 5px 10px 5px 10px;
-  padding: 0 5px;
+  margin: 5px 10px 5px 20px;
+  /* padding: 0 5px; */
+}
+
+#taxonomy_container .termRelation p {
+  margin: 15px auto 5px;
 }
 
 #taxonomy_container .termRelation li {
   list-style-type: none;
+  margin-bottom: 3px;
 }
 
 #taxonomy_container .termRelation ul {
@@ -179,6 +194,10 @@
 
 #taxonomy_container .termRelation img {
   margin-top: 10px;
+}
+
+#taxonomy_container .superTerms p {
+  margin: 5px auto 5px 20px;
 }
 
 /* #arrow {

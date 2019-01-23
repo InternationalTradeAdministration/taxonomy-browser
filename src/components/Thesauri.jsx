@@ -3,7 +3,6 @@ import Column from './Column';
 import { Checkbox } from "@material-ui/core";
 import { Link, withRouter } from 'react-router-dom';
 
-
 class Thesauri extends Component {
   constructor() {
     super()
@@ -24,7 +23,7 @@ class Thesauri extends Component {
           name: "col-3",
           items: [
             { name: "Trade Regions", value: "Trade Regions", id: "R7ySyiNxcfeZ6bfNjhocNun" },
-            { name: "**Trade Topics/Topics", value: "Trade Topics", id: "RBBed4Voz7iS3nUECA3yzNM" },
+            { name: "**Trade Topics", value: "Trade Topics", id: "RBBed4Voz7iS3nUECA3yzNM" },
             { name: "**US Trade Initiatives", value: "US Trade Initiatives", id: "RBqqOvJ9rXMcmc5SDhGjWTp" },
           ]
         }
@@ -130,7 +129,6 @@ class Thesauri extends Component {
               <Column 
                 {...col}
                 key={col.name}
-                click={this.openModal}
                 selectedItems={this.selectedItems.bind(this)}
                 AllItemsChecked={AllItemsChecked}
                 checkedListAll={checkedListAll}

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Checkbox } from "@material-ui/core";
+import { Link, withRouter } from 'react-router-dom'; 
+import Topics from './topics';
 
 class Column extends Component {
 
@@ -28,7 +30,7 @@ class Column extends Component {
                   checked={checkedListAll.includes(item.value)}
                   onChange={handleCheckboxClick}
                   color="primary"
-                />{item.name}
+                /><Link to={{pathname: `/id/${Topics[item.value].id}`}}>{item.name}</Link>
               </label>
             </div>
           );
@@ -38,4 +40,4 @@ class Column extends Component {
   }
 }
 
-export default Column;
+export default withRouter(Column);

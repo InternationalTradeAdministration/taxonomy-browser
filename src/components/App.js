@@ -11,10 +11,8 @@ class App extends Component {
         <Route exact path="/" component={Thesauri} />
 
         <Route exact path="/resultsList" render={(props) => <ResultsList {...props} API_KEY={this.props.API_KEY} />} />
-        {/*from the Thesauri component*/}
 
-        <Route exact path="/resultsList/:id" render={(props) => <TermInfo {...props} API_KEY={this.props.API_KEY} location={props.location} />} />
-        {/* from the ResultsList or another instance of TermInfo */}
+        <Route exact path="/id/:id" render={(props) => <TermInfo {...props} API_KEY={this.props.API_KEY} location={props.location} />} />
       </div>
     );
   }

@@ -10,6 +10,7 @@ class ResultsList extends Component {
       activePage: 1,
       itemsPerPage: 20,
       results: [],
+      footerData: {},
       errorMessage: '',
     }
   }
@@ -25,7 +26,7 @@ class ResultsList extends Component {
     console.log("ResultsList fetched from: " + this.searchUrl());
     fetch(this.searchUrl())
       .then(response => response.json())
-      .then(response => this.setState({ results: response.results, numberOfResults: response.total, offset: response.offset }))
+      .then(response => this.setState({ results: response.results, footerData: response, numberOfResults: response.total, offset: response.offset }))
       .catch(error => console.log(error), (error) => {
         this.setState({errorMessage: error});
       })
@@ -47,7 +48,7 @@ class ResultsList extends Component {
         <p>{this.state.numberOfResults} results:</p>
         <ul>
           {this.state.results.map(item => {
-            return <li key={item.id}><Link to={{pathname: `/resultsList/${item.id}`, state: {pageId: item.id}}}>{item.label}</Link></li>
+            return <li key={item.id}><Link to={{pathname: `/id/${item.id}`, state: {pageId: item.id}}}>{item.label}</Link></li>
           })}
         </ul>
 
@@ -62,7 +63,7 @@ class ResultsList extends Component {
           onChange={(pageNumber) => this.handlePageChange(pageNumber)}
         />
         <br />
-        <Footer json={this.state.results}/>
+        <Footer json={this.state.footerData}/>
       </div>
     );
   }

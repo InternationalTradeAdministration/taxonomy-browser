@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom'; 
 import arrow from '../Right_Arrow.png';
 import Footer from './Footer';
-
+import Topics from './topics';
 class TermInfo extends Component {
   constructor(props) {
     super(props)
     this.state = {
       item: {
-        object_properties: { member_of: [{}], has_related: [{}], has_broader: [{}], has_narrower: [{}], is_in_scheme: [{}], is_top_concept_in_scheme: [{}] },
+        type: [],
         sub_class_of: [{}],
         annotations: {},
-        related_terms: {},
-        type: [],
+        related_terms: {}, // seems to always be empty
+        object_properties: { member_of: [{}], has_related: [{}], has_broader: [{}], has_narrower: [{}], has_member: [{}], is_in_scheme: [{}], is_top_concept_in_scheme: [{}], micro_thesaurus_of: [{}] },
       },
       errorMessage: '',
       loading: false,
@@ -48,15 +48,46 @@ class TermInfo extends Component {
   render() {
     const {
       label,
-      sub_class_of,
+      type,
       annotations,
+      sub_class_of,
       object_properties,
       // related_terms,
-      type,
     } = this.state.item;
 
-    console.log("TermInfo fetched from: "+this.targetUrl())
+    console.log("TermInfo fetched from: " + this.targetUrl())
     console.log(this.state.item)
+
+    const subTopic = () => {
+      if (object_properties.member_of) return (<h3><Link to={{pathname: `/id/${object_properties.member_of[0].id}`}}>{object_properties.member_of[0].label}</Link> > </h3>)
+      else if (sub_class_of[0]) return (<h3><Link to={{pathname: `/id/${sub_class_of[0].id}`}}>{sub_class_of[0].label}</Link> > </h3>)
+      else return null
+    }
+
+    const narrowerTerms = () => {
+      if (object_properties.has_narrower) {
+        return (object_properties.has_narrower.map((t, i) => {
+          return <li key={i}><Link to={{pathname: `/id/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
+        }) )
+      } else if (object_properties.has_member) {
+        return (object_properties.has_member.map((t, i) => {
+          return <li key={i}><Link to={{pathname: `/id/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
+        }) )      
+      } else return null
+    }
+
+    
+    const memberOfConceptGroup = () => {
+      if (type.length > 0) {
+        return (type.map((t, i) => <li key={i}><Link to={{pathname: `/id/${Topics[t].id}`}}>{t}</Link></li>))
+      } else if (object_properties.member_of) {
+        return <li><Link to={{pathname: `/id/${object_properties.member_of[0].id}`}}>{object_properties.member_of[0].label}</Link></li>
+      } else if (sub_class_of.length > 0) {
+        return (sub_class_of.map((t, i) => {
+          return <li key={i}><Link to={{pathname: `/id/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
+        }) )      
+      } else return null
+    }
 
     return (
       <div>
@@ -64,17 +95,13 @@ class TermInfo extends Component {
 
           <h4><Link to={{pathname: `/`}}>ITA Thesaurus</Link> > </h4>
 
-          {type ? (<h3>{type[0]} > </h3>) : null} {/* [TODO] this doesn't come with an id, need to make a link manually */}
-
-          {(object_properties.member_of) ? (
-            <h3>{object_properties.member_of[0].label} > </h3>
-          ) : (
-            <h3>{sub_class_of[0].label} > </h3>
-          )}                              {/* [TODO] add links */}
-
+          {(type.length > 0) ? (<h3><Link to={{pathname: `/id/${Topics[type[0]].id}`}}>{type[0]}</Link> > </h3>) : null} 
+          
+          {subTopic()}                              
+          
           <h1>{label}</h1>
-
         </div>
+
         <div className="termInfo">
           <span><h3>Term Information</h3></span>
           <p><b>Preferred Term: </b>{annotations.pref_label}</p>
@@ -88,7 +115,7 @@ class TermInfo extends Component {
             <b><p>Broader terms: </p></b>
             <ul>
               {object_properties.has_broader ? (object_properties.has_broader.map((t, i) => {
-                return <li key={i}><Link to={{pathname: `/resultsList/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
+                return <li key={i}><Link to={{pathname: `/id/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
               }) ) : null }
             </ul>
           </div>
@@ -99,7 +126,7 @@ class TermInfo extends Component {
             <b><p>Related terms: </p></b>
             <ul>
               {object_properties.has_related ? (object_properties.has_related.map((t, i) => {
-                return <li key={i}><Link to={{pathname: `/resultsList/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
+                return <li key={i}><Link to={{pathname: `/id/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
               }) ) : null}
             </ul>
           </div>
@@ -109,22 +136,29 @@ class TermInfo extends Component {
           <div className="narrower">
             <b><p>Narrower Terms: </p></b>
             <ul>
-              {object_properties.has_narrower ? (object_properties.has_narrower.map((t, i) => {
-                return <li key={i}><Link to={{pathname: `/resultsList/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
-              }) ) : null}
+              {narrowerTerms()}
             </ul>
           </div>
+        </div>
 
-          <hr/>
+        <hr/>
+        <div className="superTerms">
           <b><p>Member of Concept Group: </p></b>
             <ul>
-              {type ? (type.map((t, i) => <li key={i}>{t}</li>)) : null} {/* [TODO] these don't come with ids, need to make links manually */}
+              {memberOfConceptGroup()}
             </ul>
-          <b><p>Top Term of: </p></b>
+        
+        {/* These next two things seem synonymous??? */}
+          <p><b>Top Term of: </b>
             {object_properties.is_top_concept_in_scheme ? (
               object_properties.is_top_concept_in_scheme.map((t, i) => {
-                return <li key={i}><Link to={{pathname: `/`}}>{t.label}</Link></li>
-              }) ) : null }
+                return <Link key={i} to={{pathname: `/`}}>{t.label}</Link>
+              }) ) : null }</p>
+          <p><b>Microthesaurus of: </b>
+            {(object_properties.micro_thesaurus_of) ? (
+              <Link to={{pathname: `/`}}>{object_properties.micro_thesaurus_of[0].label}</Link>
+            ) : null }</p>
+
         </div>
         <Footer json={this.state.item}/>
       </div>

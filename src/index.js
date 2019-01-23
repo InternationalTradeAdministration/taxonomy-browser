@@ -11,7 +11,7 @@ export const history = createHistory();
 const API_KEY = "ShCzzrAkXLpMTsTlhFhUjD29";
 
 ReactDOM.render(
-  <Router history={history}>
+  <Router history={history} basename={process.env.PUBLIC_URL}>
     <App API_KEY={API_KEY}/>
   </Router>,
   document.getElementById('taxonomy_container')

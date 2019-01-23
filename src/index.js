@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import createHistory from "history/createBrowserHistory" 
 import './style.css';
 import App from './components/App';
@@ -11,9 +11,9 @@ export const history = createHistory();
 const API_KEY = "ShCzzrAkXLpMTsTlhFhUjD29";
 
 ReactDOM.render(
-  <Router history={history} basename={process.env.PUBLIC_URL}>
+  <BrowserRouter history={history} basename={process.env.PUBLIC_URL}>
     <App API_KEY={API_KEY}/>
-  </Router>,
+  </BrowserRouter>,
   document.getElementById('taxonomy_container')
 );
 

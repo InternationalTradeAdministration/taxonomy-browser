@@ -20,7 +20,7 @@ class Footer extends Component {
   render() {
     return (
       <div className="footer">
-        <h4>For Developers</h4>
+        <h4>For Developers</h4> <br/>
         <button onClick={this.toggleJson}>JSON</button> {/* reveals a collapsible div which shows the contents of this.props.json */}
         <button onClick={this.downloadTerms}>Download Taxonomy</button>
         <p>The thesaurus is available to the software developer community as a JSON endpoint.</p>

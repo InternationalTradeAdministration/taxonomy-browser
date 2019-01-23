@@ -120,6 +120,11 @@
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 20px;
+  margin-top: 8px;
+}
+
+#taxonomy_container .resultsList {
+  margin-top: 20px;
 }
 
 #taxonomy_container .breadcrumb {

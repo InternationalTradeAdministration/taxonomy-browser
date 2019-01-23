@@ -1,0 +1,6 @@
+{
+  "short_name": "Taxonomy Browser",
+  "name": "Taxonomy Browser",
+  "start_url": ".",
+  "display": "standalone"
+}

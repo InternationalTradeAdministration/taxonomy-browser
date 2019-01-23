@@ -121,3 +121,62 @@
   font-size: 16px;
   line-height: 20px;
 }
+
+#taxonomy_container .breadcrumb {
+  margin: 25px 20px 20px auto;
+}
+
+#taxonomy_container .breadcrumb h1, h3, h4 {
+  display: inline;
+}
+
+#taxonomy_container .termInfo span {
+  display: block;
+  background-color: #e8eff3;
+  padding: 10px;
+}
+
+#taxonomy_container .termInfo p {
+  margin-left: 20px;
+}
+
+#taxonomy_container .termRelation span {
+  display: block;
+  background-color: #e8eff3;
+  padding: 10px;
+}
+
+/* #taxonomy_container .termRelation p {
+  margin-left: 20px;
+} */
+
+#taxonomy_container .termRelation div {
+  display: inline-block;
+  vertical-align: top;
+  margin: 5px 10px 5px 10px;
+  padding: 0 5px;
+}
+
+#taxonomy_container .termRelation li {
+  list-style-type: none;
+}
+
+#taxonomy_container .termRelation ul {
+  padding-left: 0;
+}
+
+hr {
+  border: none;
+  height: 3px;
+  background-color: #94afbf;
+  box-shadow: 0 1px 1px 0 gray;
+}
+
+#arrow {
+  margin: 0;
+	border-color: transparent #94afbf;
+	border-style: solid;
+	border-width: 8px 0px 8px 10px;
+	height: 0px;
+	width: 0px;
+}

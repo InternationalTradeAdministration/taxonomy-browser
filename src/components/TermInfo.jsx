@@ -55,7 +55,7 @@ class TermInfo extends Component {
     } = this.state.item;
 
     console.log("TermInfo fetched from: "+this.targetUrl())
-    console.log(this.state.item)
+    // console.log(this.state.item)
 
     return (
       <div>
@@ -74,34 +74,39 @@ class TermInfo extends Component {
 
           <h1>{label}</h1>
         </div>
-        
         <div className="termInfo">
-          <h4>Term Information</h4>
+          <span><h3>Term Information</h3></span>
           <p><b>Preferred Term: </b>{annotations.pref_label}</p>
           {annotations.alt_label ? (<p><b>Alternative term: </b>{annotations.alt_label}</p>) : null}
           {annotations.definition ? (<p><b>Description: </b>{annotations.definition}</p>) : null}
           <p><b>Term Source: </b>{annotations.source}</p>
         </div>
         <div className="termRelation">
-          <h4>Term Relationships</h4>
+          <span><h3>Term Relationships</h3></span>
           <div className="broader">
-            <b>Broader terms:</b>
+            <b><p>Broader terms: </p></b>
             <ul>
               {object_properties.has_broader ? (object_properties.has_broader.map((t, i) => {
                 return <li key={i}><Link to={{pathname: `/resultsList/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
               }) ) : null }
             </ul>
           </div>
+          
+          <div id="arrow"></div>
+
           <div className="related">
-            <b>Related terms: </b>
+            <b><p>Related terms: </p></b>
             <ul>
               {object_properties.has_related ? (object_properties.has_related.map((t, i) => {
                 return <li key={i}><Link to={{pathname: `/resultsList/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
               }) ) : null}
             </ul>
           </div>
+
+          <div id="arrow"></div>
+
           <div className="narrower">
-            <b>Narrower Terms: </b>
+            <b><p>Narrower Terms: </p></b>
             <ul>
               {object_properties.has_narrower ? (object_properties.has_narrower.map((t, i) => {
                 return <li key={i}><Link to={{pathname: `/resultsList/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
@@ -109,13 +114,12 @@ class TermInfo extends Component {
             </ul>
           </div>
 
-          <hr />
-          <b>Member of Concept Group: </b>
+          <hr/>
+          <b><p>Member of Concept Group: </p></b>
             <ul>
               {type ? (type.map((t, i) => <li key={i}>{t}</li>)) : null} {/* [TODO] these don't come with ids, need to make links manually */}
             </ul>
-          <br />
-          <b>Top Term of: </b>
+          <b><p>Top Term of: </p></b>
             {object_properties.is_top_concept_in_scheme ? (
               object_properties.is_top_concept_in_scheme.map((t, i) => {
                 return <li key={i}><Link to={{pathname: `/`}}>{t.label}</Link></li>

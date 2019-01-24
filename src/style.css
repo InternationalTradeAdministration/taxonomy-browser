@@ -48,6 +48,7 @@
   display: inline-block;
   vertical-align: top;
   text-align: center;
+  margin-top: 13px;
 }
 
 #taxonomy_container #selectAll {

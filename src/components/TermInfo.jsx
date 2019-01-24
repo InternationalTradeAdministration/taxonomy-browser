@@ -64,6 +64,14 @@ class TermInfo extends Component {
       else return null
     }
 
+    const description = () => {
+      if (annotations.definition) {
+        return (<p><b>Description: </b>{annotations.definition}</p>)
+      } else if (annotations.scope_note) {
+        return (<p><b>Description: </b>{annotations.scope_note}</p>)
+      } else return null
+    }
+
     const narrowerTerms = () => {
       if (object_properties.has_narrower) {
         return (object_properties.has_narrower.map((t, i) => {
@@ -106,7 +114,7 @@ class TermInfo extends Component {
           <span><h3>Term Information</h3></span>
           <p><b>Preferred Term: </b>{annotations.pref_label}</p>
           {annotations.alt_label ? (<p><b>Alternative term: </b>{annotations.alt_label}</p>) : null}
-          {annotations.definition ? (<p><b>Description: </b>{annotations.definition}</p>) : null}
+          {description()}
           <p><b>Term Source: </b>{annotations.source}</p>
         </div>
         <div className="termRelation">
@@ -142,22 +150,25 @@ class TermInfo extends Component {
         </div>
 
         <hr/>
+
         <div className="superTerms">
-          <b><p>Member of Concept Group: </p></b>
-            <ul>
-              {memberOfConceptGroup()}
-            </ul>
+          {memberOfConceptGroup() ? (
+            <>
+              <b><p>Member of Concept Group: </p></b>
+              <ul>
+                {memberOfConceptGroup()}
+              </ul>
+            </>
+          ) : null}
         
-        {/* These next two things seem synonymous??? */}
-          <p><b>Top Term of: </b>
-            {object_properties.is_top_concept_in_scheme ? (
-              object_properties.is_top_concept_in_scheme.map((t, i) => {
-                return <Link key={i} to={{pathname: `/`}}>{t.label}</Link>
-              }) ) : null }</p>
-          <p><b>Microthesaurus of: </b>
-            {(object_properties.micro_thesaurus_of) ? (
-              <Link to={{pathname: `/`}}>{object_properties.micro_thesaurus_of[0].label}</Link>
-            ) : null }</p>
+          {object_properties.is_top_concept_in_scheme ? (
+            <p><b>Top Term of: </b> {object_properties.is_top_concept_in_scheme.map((t, i) => {
+              return (<Link key={i} to={{pathname: `/`}}>{t.label}</Link>) })}</p> ) : null }
+          
+          {(object_properties.micro_thesaurus_of) ? (
+            <p><b>Microthesaurus of: </b>
+            <Link to={{pathname: `/`}}>{object_properties.micro_thesaurus_of[0].label}</Link></p>
+          ) : null }
 
         </div>
         <Footer json={this.state.item}/>

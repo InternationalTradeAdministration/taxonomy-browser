@@ -11,7 +11,7 @@ class TermInfo extends Component {
         type: [],
         sub_class_of: [{}],
         annotations: {},
-        related_terms: {}, // seems to always be empty
+        related_terms: {}, // unused
         object_properties: { member_of: [{}], has_related: [{}], has_broader: [{}], has_narrower: [{}], has_member: [{}], is_in_scheme: [{}], is_top_concept_in_scheme: [{}], micro_thesaurus_of: [{}] },
       },
       errorMessage: '',
@@ -75,11 +75,11 @@ class TermInfo extends Component {
     const narrowerTerms = () => {
       if (object_properties.has_narrower) {
         return (object_properties.has_narrower.map((t, i) => {
-          return <li key={i}><Link to={{pathname: `/id/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
+          return <li key={i}><Link to={{pathname: `/id/${t.id}`}}>{t.label}</Link></li>
         }) )
       } else if (object_properties.has_member) {
         return (object_properties.has_member.map((t, i) => {
-          return <li key={i}><Link to={{pathname: `/id/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
+          return <li key={i}><Link to={{pathname: `/id/${t.id}`}}>{t.label}</Link></li>
         }) )      
       } else return null
     }
@@ -92,7 +92,7 @@ class TermInfo extends Component {
         return <li><Link to={{pathname: `/id/${object_properties.member_of[0].id}`}}>{object_properties.member_of[0].label}</Link></li>
       } else if (sub_class_of.length > 0) {
         return (sub_class_of.map((t, i) => {
-          return <li key={i}><Link to={{pathname: `/id/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
+          return <li key={i}><Link to={{pathname: `/id/${t.id}`}}>{t.label}</Link></li>
         }) )      
       } else return null
     }
@@ -123,7 +123,7 @@ class TermInfo extends Component {
             <b><p>Broader terms: </p></b>
             <ul>
               {object_properties.has_broader ? (object_properties.has_broader.map((t, i) => {
-                return <li key={i}><Link to={{pathname: `/id/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
+                return <li key={i}><Link to={{pathname: `/id/${t.id}`}}>{t.label}</Link></li>
               }) ) : null }
             </ul>
           </div>
@@ -134,7 +134,7 @@ class TermInfo extends Component {
             <b><p>Related terms: </p></b>
             <ul>
               {object_properties.has_related ? (object_properties.has_related.map((t, i) => {
-                return <li key={i}><Link to={{pathname: `/id/${t.id}`, state: {pageId: t.id}}}>{t.label}</Link></li>
+                return <li key={i}><Link to={{pathname: `/id/${t.id}`}}>{t.label}</Link></li>
               }) ) : null}
             </ul>
           </div>

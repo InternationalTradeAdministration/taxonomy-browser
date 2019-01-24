@@ -69,6 +69,8 @@ class TermInfo extends Component {
         return (<p><b>Description: </b>{annotations.definition}</p>)
       } else if (annotations.scope_note) {
         return (<p><b>Description: </b>{annotations.scope_note}</p>)
+      } else if (annotations.comment) {
+        return (<p><b>Description: </b>{annotations.comment}</p>)
       } else return null
     }
 

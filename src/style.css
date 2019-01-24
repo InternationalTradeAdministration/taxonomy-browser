@@ -73,6 +73,10 @@
   size: 10px;
 }
 
+#taxonomy_container .spinner {
+  margin-left: 75px;
+}
+
 #taxonomy_container ul.pagination li {
   display: inline-block;
   text-align: center;

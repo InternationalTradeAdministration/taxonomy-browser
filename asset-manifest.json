@@ -1,13 +1,13 @@
 {
-  "main.css": "/taxonomy-browser/static/css/main.3bb47f47.chunk.css",
-  "main.js": "/taxonomy-browser/static/js/main.61d4bab8.chunk.js",
-  "main.js.map": "/taxonomy-browser/static/js/main.61d4bab8.chunk.js.map",
+  "main.css": "/taxonomy-browser/static/css/main.e7dd01f6.chunk.css",
+  "main.js": "/taxonomy-browser/static/js/main.07f70242.chunk.js",
+  "main.js.map": "/taxonomy-browser/static/js/main.07f70242.chunk.js.map",
   "static/js/1.ceae168e.chunk.js": "/taxonomy-browser/static/js/1.ceae168e.chunk.js",
   "static/js/1.ceae168e.chunk.js.map": "/taxonomy-browser/static/js/1.ceae168e.chunk.js.map",
   "runtime~main.js": "/taxonomy-browser/static/js/runtime~main.a36e0160.js",
   "runtime~main.js.map": "/taxonomy-browser/static/js/runtime~main.a36e0160.js.map",
-  "static/css/main.3bb47f47.chunk.css.map": "/taxonomy-browser/static/css/main.3bb47f47.chunk.css.map",
+  "static/css/main.e7dd01f6.chunk.css.map": "/taxonomy-browser/static/css/main.e7dd01f6.chunk.css.map",
   "index.html": "/taxonomy-browser/index.html",
-  "precache-manifest.b408d4061bd8d1e6fa6d1f07c216b1f6.js": "/taxonomy-browser/precache-manifest.b408d4061bd8d1e6fa6d1f07c216b1f6.js",
+  "precache-manifest.25b44519fd9b071314376747b5625d39.js": "/taxonomy-browser/precache-manifest.25b44519fd9b071314376747b5625d39.js",
   "service-worker.js": "/taxonomy-browser/service-worker.js"
 }

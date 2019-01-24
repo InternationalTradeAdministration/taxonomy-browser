@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/taxonomy-browser/static/js/runtime~main.a36e0160.js"
   },
   {
-    "revision": "61d4bab840190a103931",
-    "url": "/taxonomy-browser/static/js/main.61d4bab8.chunk.js"
+    "revision": "07f70242d8a311648a35",
+    "url": "/taxonomy-browser/static/js/main.07f70242.chunk.js"
   },
   {
     "revision": "ceae168e9bea199607f1",
     "url": "/taxonomy-browser/static/js/1.ceae168e.chunk.js"
   },
   {
-    "revision": "61d4bab840190a103931",
-    "url": "/taxonomy-browser/static/css/main.3bb47f47.chunk.css"
+    "revision": "07f70242d8a311648a35",
+    "url": "/taxonomy-browser/static/css/main.e7dd01f6.chunk.css"
   },
   {
-    "revision": "6f6edc936fc1298df051c10ca250b3e9",
+    "revision": "b563e0d5bcd43acd262dac98f1256e94",
     "url": "/taxonomy-browser/index.html"
   }
 ];

@@ -1,10 +1,10 @@
 self.__precacheManifest = [
   {
-    "revision": "c5774bff51d9ed5fada6",
+    "revision": "264bf4cc218ceab822ad",
     "url": "/taxonomy-browser/static/js/taxonomy-browser.js"
   },
   {
-    "revision": "c5774bff51d9ed5fada6",
+    "revision": "264bf4cc218ceab822ad",
     "url": "/taxonomy-browser/static/css/taxonomy-browser.css"
   },
   {

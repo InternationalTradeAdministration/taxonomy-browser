@@ -1,5 +1,6 @@
-# Thesaurus of International Trade Terms
+[![Build Status](https://travis-ci.org/GovWizely/taxonomy-browser.svg?branch=master)](https://travis-ci.org/GovWizely/taxonomy-browser)
 
+# Thesaurus of International Trade Terms
 The International Trade Administration’s (ITA) Thesaurus of International Trade Terms is a controlled and structured list of words and phrases used to tag and index information found on the ITA’s websites and databases. The thesaurus covers all subjects related to international trade and foreign investment with particular emphasis on exporting, trade promotion, market access and enforcement and compliance.
 
 The thesaurus is structured into six domains or micro-thesauri:

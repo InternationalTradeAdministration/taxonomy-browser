@@ -1,27 +1,3 @@
-/* @media (min-width: 768px) {
-  #root {
-    width: 750px;
-  }  
-}
-
-@media (min-width: 992) {
-  #root {
-    width: 970px;
-  }
-} 
-
-@media (min-width: 1200px) {
-  #root {
-    width: 1170px;
-  }
-} */
-
-/* @media (min-width: 1040px) { */
-  #root {
-    width: 1040px;
-  }
-/* } */
-
 #taxonomy_container {
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   border: 0.75px solid lightgray;

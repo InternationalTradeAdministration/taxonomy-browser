@@ -58,23 +58,20 @@ class TermInfo extends Component {
     console.log("TermInfo fetched from: " + this.targetUrl())
     console.log(this.state.item)
 
-    const subTopic = () => {
+    const subTopic = () => {  // "member_of" or "sub_class_of"
       if (object_properties.member_of) return (<h3><Link to={{pathname: `/id/${object_properties.member_of[0].id}`}}>{object_properties.member_of[0].label}</Link> > </h3>)
       else if (sub_class_of[0]) return (<h3><Link to={{pathname: `/id/${sub_class_of[0].id}`}}>{sub_class_of[0].label}</Link> > </h3>)
       else return null
     }
 
-    const description = () => {
-      if (annotations.definition) {
-        return (<p><b>Description: </b>{annotations.definition}</p>)
-      } else if (annotations.scope_note) {
-        return (<p><b>Description: </b>{annotations.scope_note}</p>)
-      } else if (annotations.comment) {
-        return (<p><b>Description: </b>{annotations.comment}</p>)
-      } else return null
+    const description = () => { // "definition", "scope_note", or "comment"
+      if (annotations.definition) { return (<p><b>Description: </b>{annotations.definition}</p>) }
+      else if (annotations.scope_note) { return (<p><b>Description: </b>{annotations.scope_note}</p>) }
+      else if (annotations.comment) { return (<p><b>Description: </b>{annotations.comment}</p>) }
+      else return null
     }
 
-    const narrowerTerms = () => {
+    const narrowerTerms = () => { // "has_narrower" or "has_member"
       if (object_properties.has_narrower) {
         return (object_properties.has_narrower.map((t, i) => {
           return <li key={i}><Link to={{pathname: `/id/${t.id}`}}>{t.label}</Link></li>
@@ -86,8 +83,7 @@ class TermInfo extends Component {
       } else return null
     }
 
-    
-    const memberOfConceptGroup = () => {
+    const memberOfConceptGroup = () => {  // "type", "member_of", or "sub_class_of"
       if (type.length > 0) {
         return (type.map((t, i) => <li key={i}><Link to={{pathname: `/id/${Topics[t].id}`}}>{t}</Link></li>))
       } else if (object_properties.member_of) {
@@ -101,24 +97,21 @@ class TermInfo extends Component {
 
     return (
       <div>
-        <div className="breadcrumb">
-
-          <h4><Link to={{pathname: `/`}}>ITA Thesaurus</Link> > </h4>
-
-          {(type.length > 0) ? (<h3><Link to={{pathname: `/id/${Topics[type[0]].id}`}}>{type[0]}</Link> > </h3>) : null} 
-          
-          {subTopic()}                              
-          
-          <h1>{label}</h1>
+        <div className="breadcrumbs">
+          {/* Top Level */} <h4><Link to={{pathname: `/`}}>ITA Thesaurus</Link> > </h4>
+          {/* Type or Topic */} {(type.length > 0) ? (<h3><Link to={{pathname: `/id/${Topics[type[0]].id}`}}>{type[0]}</Link> > </h3>) : null} 
+          {/* SubTopic */} {subTopic()}                              
+          {/* Term */} <h1>{label}</h1>
         </div>
 
         <div className="termInfo">
           <span><h3>Term Information</h3></span>
-          <p><b>Preferred Term: </b>{annotations.pref_label}</p>
+          {annotations.pref_label ? (<p><b>Preferred Term: </b>{annotations.pref_label}</p>) : null}
           {annotations.alt_label ? (<p><b>Alternative term: </b>{annotations.alt_label}</p>) : null}
           {description()}
-          <p><b>Term Source: </b>{annotations.source}</p>
+          {annotations.source ? (<p><b>Term Source: </b>{annotations.source}</p>) : null}
         </div>
+
         <div className="termRelation">
           <span><h3>Term Relationships</h3></span>
           <div className="broader">

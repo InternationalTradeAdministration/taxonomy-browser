@@ -1,5 +1,5 @@
 import 'react-app-polyfill/ie11';
-import 'babel-polyfill';
+import 'babel-polyfill'; // necessary for IE11 support for Router
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';

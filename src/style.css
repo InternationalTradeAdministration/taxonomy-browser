@@ -120,11 +120,11 @@
   margin-top: 20px;
 }
 
-#taxonomy_container .breadcrumb {
+#taxonomy_container .breadcrumbs {
   margin: 25px 20px 20px auto;
 }
 
-#taxonomy_container .breadcrumb h1, h2, h3, h4 {
+#taxonomy_container .breadcrumbs h1, h2, h3, h4 {
   display: inline;
 }
 

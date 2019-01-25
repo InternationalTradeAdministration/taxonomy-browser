@@ -37,11 +37,11 @@ test('user can search based on text input', async () => {
   await page.click(firstResult);
 
   // arrive on the TermInfo page, identify concept group
-  const termInfoLabel = '#taxonomy_container div.breadcrumb h1';
+  const termInfoLabel = '#taxonomy_container div.breadcrumbs h1';
   await page.waitForSelector(termInfoLabel);
   const conceptGroup = '#taxonomy_container > div > div > div.superTerms > ul > li > a';
   await page.waitForSelector(conceptGroup);
-  const ITA_home = '#taxonomy_container > div > div > div.breadcrumb > h4 > a';
+  const ITA_home = '#taxonomy_container > div > div > div.breadcrumbs > h4 > a';
   await page.waitForSelector(ITA_home);
   await page.click(ITA_home);
 });
@@ -64,11 +64,11 @@ test('user can search based on a checkbox input', async () => {
   await page.click(firstResult);
   
   // arrive on the TermInfo page, identify concept group
-  const termInfoLabel = '#taxonomy_container div.breadcrumb h1';
+  const termInfoLabel = '#taxonomy_container div.breadcrumbs h1';
   await page.waitForSelector(termInfoLabel);
   const conceptGroup = '#taxonomy_container > div > div > div.superTerms > ul > li > a';
   await page.waitForSelector(conceptGroup);
-  const ITA_home = '#taxonomy_container > div > div > div.breadcrumb > h4 > a';
+  const ITA_home = '#taxonomy_container > div > div > div.breadcrumbs > h4 > a';
   await page.waitForSelector(ITA_home);
   await page.click(ITA_home);
 });

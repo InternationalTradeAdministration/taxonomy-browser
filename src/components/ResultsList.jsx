@@ -53,7 +53,7 @@ class ResultsList extends Component {
         <p>{this.state.numberOfResults} results:</p>
 
         {(this.state.loading) ? (
-          <div className="spinner"><Loader type="Grid" color="#00CC66" width="100"/></div>
+          <div className="spinner"><Loader type="ThreeDots" color="#00CC66" width="100"/></div>
         ) : (
           <ul>
             {this.state.results.map(item => {

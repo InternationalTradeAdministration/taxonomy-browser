@@ -14,3 +14,7 @@ The thesaurus is structured into six domains or micro-thesauri:
 The thesaurus is available to the software developer community as a JSON endpoint.
 
 The thesaurus was developed by ITA’s staff of international trade specialists, consulting several authoritative sources and vocabularies covering the language of international trade and investment.
+
+## Known issues: 
+* among the checkboxes, `US Trade Initiatives` and `Trade Topics` have asterisks because they don't return any results when passed as part of the search query
+* the `Download Taxonomy` button is not connected to anything (appears in the ResultsList and TermInfo views)

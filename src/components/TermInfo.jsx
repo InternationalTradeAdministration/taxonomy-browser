@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom'; 
 import arrow from '../Right_Arrow.png';
 import Footer from './Footer';
-import Topics from './topics';
+import topics from './topics';
 class TermInfo extends Component {
   constructor(props) {
     super(props)
@@ -85,7 +85,7 @@ class TermInfo extends Component {
 
     const memberOfConceptGroup = () => {  // "type", "member_of", or "sub_class_of"
       if (type.length > 0) {
-        return (type.map((t, i) => <li key={i}><Link to={{pathname: `/id/${Topics[t].id}`}}>{t}</Link></li>))
+        return (type.map((t, i) => <li key={i}><Link to={{pathname: `/id/${topics[t].id}`}}>{t}</Link></li>))
       } else if (object_properties.member_of) {
         return <li><Link to={{pathname: `/id/${object_properties.member_of[0].id}`}}>{object_properties.member_of[0].label}</Link></li>
       } else if (sub_class_of.length > 0) {
@@ -99,7 +99,7 @@ class TermInfo extends Component {
       <div>
         <div className="breadcrumbs">
           {/* Top Level */} <h4><Link to={{pathname: `/`}}>ITA Thesaurus</Link> > </h4>
-          {/* Type or Topic */} {(type.length > 0) ? (<h3><Link to={{pathname: `/id/${Topics[type[0]].id}`}}>{type[0]}</Link> > </h3>) : null} 
+          {/* Type or Topic */} {(type.length > 0) ? (<h3><Link to={{pathname: `/id/${topics[type[0]].id}`}}>{type[0]}</Link> > </h3>) : null} 
           {/* SubTopic */} {subTopic()}                              
           {/* Term */} <h1>{label}</h1>
         </div>

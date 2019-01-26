@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Column from './Column';
+import Checkboxes from './Checkboxes';
 import { Checkbox } from "@material-ui/core";
 import { Link, withRouter } from 'react-router-dom';
 
@@ -126,7 +126,7 @@ class Thesauri extends Component {
 
           {columns.map(col => {
             return (
-              <Column 
+              <Checkboxes 
                 {...col}
                 key={col.name}
                 selectedItems={this.selectedItems.bind(this)}

@@ -24,7 +24,6 @@ class Thesauri extends Component {
           items: [
             { name: "Trade Regions", value: "Trade Regions", id: "R7ySyiNxcfeZ6bfNjhocNun" },
             { name: "**Trade Topics", value: "Trade Topics", id: "RBBed4Voz7iS3nUECA3yzNM" },
-            { name: "**US Trade Initiatives", value: "US Trade Initiatives", id: "RBqqOvJ9rXMcmc5SDhGjWTp" },
           ]
         }
       ],

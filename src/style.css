@@ -60,11 +60,13 @@
 
 #taxonomy_container .col-2 {
   display: inline-block;
+  vertical-align: top;
   text-align: left;
 }
 
 #taxonomy_container .col-3 {
   display: inline-block;
+  vertical-align: top;
   text-align: left;
 }
 

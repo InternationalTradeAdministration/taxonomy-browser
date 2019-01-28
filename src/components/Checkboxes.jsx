@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Checkbox } from "@material-ui/core";
 import { Link, withRouter } from 'react-router-dom'; 
-import topics from './topics';
+import topics from '../topics';
 
 class Checkboxes extends Component {
 

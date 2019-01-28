@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom'; 
 import arrow from '../Right_Arrow.png';
 import Footer from './Footer';
-import topics from './topics';
+import topics from '../topics';
 class TermInfo extends Component {
   constructor(props) {
     super(props)

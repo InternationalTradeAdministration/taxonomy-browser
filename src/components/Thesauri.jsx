@@ -107,7 +107,7 @@ class Thesauri extends Component {
         <p>The International Trade Administration’s (ITA) Thesaurus of International Trade Terms is a controlled and structured list of words and phrases used to tag and index information found on the ITA’s websites and databases. The thesaurus covers all subjects related to international trade and foreign investment with particular emphasis on exporting, trade promotion, market access and enforcement and compliance.</p>
 
         <div className="center">
-          <input type="text" name="queryString" placeholder="Enter search query" value={this.state.queryString} onChange={(event) => this.handleChange(event)}/>
+          <input type="text" name="queryString" placeholder="Enter search query" aria-label="Enter search query" value={this.state.queryString} onChange={(event) => this.handleChange(event)}/>
           <Link to={{pathname: `/resultsList`, state: {
             queryString: this.state.queryString,
             typesChecked: this.state.checkedListAll,

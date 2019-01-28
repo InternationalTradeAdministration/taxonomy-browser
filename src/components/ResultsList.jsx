@@ -49,8 +49,8 @@ class ResultsList extends Component {
 
     return (
       <div className="resultsList">
-        <h3>Search Results</h3>
-        <p>{this.state.numberOfResults} results:</p>
+        <h1>Search Results</h1>
+        <p><b>{this.state.numberOfResults} results:</b></p>
 
         {(this.state.loading) ? (
           <div className="spinner"><Loader type="ThreeDots" color="#00CC66" width="100"/></div>

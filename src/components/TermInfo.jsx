@@ -59,8 +59,8 @@ class TermInfo extends Component {
     console.log(this.state.item)
 
     const subTopic = () => {  // "member_of" or "sub_class_of"
-      if (object_properties.member_of) return (<h3><Link to={{pathname: `/id/${object_properties.member_of[0].id}`}}>{object_properties.member_of[0].label}</Link> > </h3>)
-      else if (sub_class_of[0]) return (<h3><Link to={{pathname: `/id/${sub_class_of[0].id}`}}>{sub_class_of[0].label}</Link> > </h3>)
+      if (object_properties.member_of) return (<h2><Link to={{pathname: `/id/${object_properties.member_of[0].id}`}}>{object_properties.member_of[0].label}</Link> > </h2>)
+      else if (sub_class_of[0]) return (<h2><Link to={{pathname: `/id/${sub_class_of[0].id}`}}>{sub_class_of[0].label}</Link> > </h2>)
       else return null
     }
 
@@ -105,7 +105,7 @@ class TermInfo extends Component {
         </div>
 
         <div className="termInfo">
-          <span><h3>Term Information</h3></span>
+          <span><h2>Term Information</h2></span>
           {annotations.pref_label ? (<p><b>Preferred Term: </b>{annotations.pref_label}</p>) : null}
           {annotations.alt_label ? (<p><b>Alternative term: </b>{annotations.alt_label}</p>) : null}
           {description()}
@@ -113,7 +113,7 @@ class TermInfo extends Component {
         </div>
 
         <div className="termRelation">
-          <span><h3>Term Relationships</h3></span>
+          <span><h2>Term Relationships</h2></span>
           <div className="broader">
             <b><p>Broader terms: </p></b>
             <ul>

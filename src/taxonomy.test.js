@@ -28,7 +28,7 @@ test('user can search based on text input', async () => {
   await page.click(searchButton);
 
   // arrive on the Search Results page, click the first item
-  const searchResultsHeader = '#taxonomy_container h3';
+  const searchResultsHeader = '#taxonomy_container h1';
   await page.waitForSelector(searchResultsHeader);
   const headerText = await page.$eval(searchResultsHeader, e => e.innerHTML);
   expect(headerText).toBe('Search Results');
@@ -51,7 +51,7 @@ test('user can search based on a checkbox input', async () => {
   // click the "Industries" box, then click Search button
   const IndustriesCheckbox = '#taxonomy_container input[type="checkbox"]:nth-child(2)';
   const searchButton = '#taxonomy_container div.center button';
-  const searchResultsHeader = '#taxonomy_container h3';
+  const searchResultsHeader = '#taxonomy_container h1';
   await page.click(IndustriesCheckbox);
   await page.click(searchButton);
 

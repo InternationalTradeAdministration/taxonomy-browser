@@ -1,9 +1,9 @@
 {
-  "main.css": "/taxonomy-browser/static/css/taxonomy-browser.css",
-  "main.js": "/taxonomy-browser/static/js/taxonomy-browser.js",
-  "main.js.map": "/taxonomy-browser/static/js/taxonomy-browser.js.map",
-  "static/css/taxonomy-browser.css.map": "/taxonomy-browser/static/css/taxonomy-browser.css.map",
-  "index.html": "/taxonomy-browser/index.html",
-  "precache-manifest.59e5216d8b19b640d7f2d4810fcc2010.js": "/taxonomy-browser/precache-manifest.59e5216d8b19b640d7f2d4810fcc2010.js",
-  "service-worker.js": "/taxonomy-browser/service-worker.js"
+  "main.css": "./static/css/taxonomy-browser.css",
+  "main.js": "./static/js/taxonomy-browser.js",
+  "main.js.map": "./static/js/taxonomy-browser.js.map",
+  "static/css/taxonomy-browser.css.map": "./static/css/taxonomy-browser.css.map",
+  "index.html": "./index.html",
+  "precache-manifest.e7d4110f464782cdc624b2295fce386e.js": "./precache-manifest.e7d4110f464782cdc624b2295fce386e.js",
+  "service-worker.js": "./service-worker.js"
 }

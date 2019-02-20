@@ -4,6 +4,6 @@
   "main.js.map": "./static/js/taxonomy-browser.js.map",
   "static/css/taxonomy-browser.css.map": "./static/css/taxonomy-browser.css.map",
   "index.html": "./index.html",
-  "precache-manifest.dd9fbb78dfdebf4a38b2cf70b0002a53.js": "./precache-manifest.dd9fbb78dfdebf4a38b2cf70b0002a53.js",
+  "precache-manifest.40d2de0fb12994b0363a2d8a7e8e484d.js": "./precache-manifest.40d2de0fb12994b0363a2d8a7e8e484d.js",
   "service-worker.js": "./service-worker.js"
 }

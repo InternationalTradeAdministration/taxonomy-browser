@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom'; 
-import arrow from '../Right_Arrow.png';
+import arrow from '../images/Right_Arrow.png';
 import FloatingSearchBox from './FloatingSearchBox';
 // import Footer from './Footer';
 import topics from '../topics';

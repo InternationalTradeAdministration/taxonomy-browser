@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Select from 'react-select';
 import { Link, withRouter } from 'react-router-dom';
 import Autocomplete from 'react-autocomplete';
-import '../style.css';
+import '../taxonomy-browser.css';
 
 class SearchBar extends Component {
   constructor() {
@@ -10,7 +9,7 @@ class SearchBar extends Component {
     this.state = {
       queryString: "",
       autosuggestions: [],
-      selectedTopic: {value: "", label: "All Categories"},
+      selectedTopic: "",
     }
     this.handleChangeTopic = this.handleChangeTopic.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -25,12 +24,14 @@ class SearchBar extends Component {
     this.setState({ [name]: value }, this.initiateSuggestions);
   };
 
-  handleChangeTopic(selectedTopic) {
-    this.setState({selectedTopic: selectedTopic}, this.initiateSuggestions);
+  handleChangeTopic(e) {
+    this.setState({selectedTopic: e.target.value}, () => {
+      return this.initiateSuggestions;
+    });
   };
 
   initiateSuggestions = () => {
-    if (this.state.queryString.length > 3) {
+    if (this.state.queryString.length > 1) {
       this.retrieveSuggestions(this.state.queryString);
     } else {
       this.setState({ autosuggestions: [] })
@@ -44,7 +45,7 @@ class SearchBar extends Component {
   retrieveSuggestions(value) {
     this.setState({autosuggestions: []});
     let searchUrl = (
-      `${this.props.BASE_URL}/ita_taxonomies/search?api_key=${this.props.API_KEY}&q=${value}&types=${this.state.selectedTopic.value}`
+      `${this.props.BASE_URL}/ita_taxonomies/search?api_key=${this.props.API_KEY}&q=${value}&types=${this.state.selectedTopic}`
     );
     fetch(searchUrl)
     .then(response => response.json())
@@ -72,14 +73,16 @@ class SearchBar extends Component {
         <p>The International Trade Administration’s (ITA) Thesaurus of International Trade Terms is a controlled and structured list of words and phrases used to tag and index information found on the ITA’s websites and databases. The thesaurus covers all subjects related to international trade and foreign investment with particular emphasis on exporting, trade promotion, market access and enforcement and compliance.</p>
 
         <form onSubmit={(event) => event.preventDefault()} className="center taxonomy-search-form">
-          <Select 
-            options={topics}
-            onChange={this.handleChangeTopic} 
-            value={this.state.selectedTopic} 
-            aria-label="Select a Topic" 
-            className="Select"
-            classNamePrefix="Select"
-          />
+          <label aria-label="Select a Category">
+            <select value={this.state.selectedTopic} onChange={this.handleChangeTopic} className="dropdown">
+              <option value="">All Categories</option>
+              <option value="Industries">Industries</option>
+              <option value="Countries">Countries</option>
+              <option value="World Regions">World Regions</option>
+              <option value="Trade Regions">Trade Regions</option>
+              <option value="Trade Topics">Trade Topics</option>
+            </select>
+          </label>
           <Autocomplete
             inputProps = {{
               type: 'text',
@@ -95,7 +98,7 @@ class SearchBar extends Component {
             onChange={this.handleChange}
             onSelect={this.onSelectSuggestion}
           />
-          <Link to={{pathname: `/search`, search: `&q=${this.state.queryString}&types=${this.state.selectedTopic.value}`}}>
+          <Link to={{pathname: `/search`, search: `&q=${this.state.queryString}&types=${this.state.selectedTopic}`}}>
             <button>Search</button>
           </Link>
         </form>
@@ -105,12 +108,3 @@ class SearchBar extends Component {
 }
 
 export default withRouter(SearchBar);
-
-const topics = [
-  {value: "", label: "All Categories"},
-  {value: "Industries", label: "Industries", id: "R79uIjoQaQ9KzvJfyB1H7Ru" },
-  {value: "Countries", label: "Countries", id: "R8W91u35GBegWcXXFflYE4" },
-  {value: "World Regions", label: "World Regions", id: "R8cndKa2D8NuNg7djwJcXxB" },
-  {value: "Trade Regions", label: "Trade Regions", id: "R7ySyiNxcfeZ6bfNjhocNun" },
-  {value: "Trade Topics", label: "Trade Topics", id: "RBBed4Voz7iS3nUECA3yzNM" },
-];

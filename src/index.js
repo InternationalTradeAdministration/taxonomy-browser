@@ -3,7 +3,7 @@ import 'babel-polyfill'; // necessary for IE11 support for Router
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter } from 'react-router-dom';
-import './style.css';
+import './taxonomy-browser.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
  

@@ -55,12 +55,10 @@ test('user can search based on text input', async () => {
 test('user can search based on a selected category', async () => {
   
   // click the "Industries" box, then click Search button
-  const openSelectMenu = '.taxonomy_container .Select__control';
-  const secondOption = '.taxonomy_container .Select__menu-list div:nth-child(2)';
+  const SelectMenu = '.taxonomy_container .dropdown';
   const searchButton = '.taxonomy_container form button';
-  await page.waitForSelector(openSelectMenu, 30000)
-  await page.click(openSelectMenu);
-  await page.click(secondOption);
+  await page.waitForSelector(SelectMenu, 30000)
+  await page.select('.dropdown', 'Industries');
   await page.click(searchButton);
 
   // arrive on the Search Results page, click the first item

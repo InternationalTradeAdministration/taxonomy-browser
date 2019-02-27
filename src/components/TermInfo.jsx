@@ -154,12 +154,12 @@ class TermInfo extends Component {
           ) : null}
         
           {object_properties.is_top_concept_in_scheme ? (
-            <p><b>Top Term of: </b> {object_properties.is_top_concept_in_scheme.map((t, i) => {
-              return (<Link key={i} to={{pathname: `/`}}>{t.label}</Link>) })}</p> 
+            <p><b>Top Term of: </b> {object_properties.is_top_concept_in_scheme.map((t) => {
+              return t.label })}</p> 
           ) : null }
           
           {(object_properties.micro_thesaurus_of) ? (
-            <p><b>Microthesaurus of: </b><Link to={{pathname: `/`}}>{object_properties.micro_thesaurus_of[0].label}</Link></p>
+            <p><b>Microthesaurus of: </b>{object_properties.micro_thesaurus_of[0].label}</p>
           ) : null }
 
         </div>

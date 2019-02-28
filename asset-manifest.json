@@ -2,8 +2,9 @@
   "main.css": "./static/css/taxonomy-browser.css",
   "main.js": "./static/js/taxonomy-browser.js",
   "main.js.map": "./static/js/taxonomy-browser.js.map",
+  "static/media/style.css": "./static/media/dropdown-icon.0dadb5de.svg",
   "static/css/taxonomy-browser.css.map": "./static/css/taxonomy-browser.css.map",
   "index.html": "./index.html",
-  "precache-manifest.901d51525a16fb6ec2a2f046a4fd16ac.js": "./precache-manifest.901d51525a16fb6ec2a2f046a4fd16ac.js",
+  "precache-manifest.e79adfc79fbfd5aa89d5e85da44ea3bd.js": "./precache-manifest.e79adfc79fbfd5aa89d5e85da44ea3bd.js",
   "service-worker.js": "./service-worker.js"
 }

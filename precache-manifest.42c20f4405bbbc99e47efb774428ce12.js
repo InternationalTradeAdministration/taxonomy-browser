@@ -4,11 +4,11 @@ self.__precacheManifest = [
     "url": "./static/media/dropdown-icon.0dadb5de.svg"
   },
   {
-    "revision": "458fc68ed89af775ba8d",
+    "revision": "8f90b832a7d4fe2c0f9d",
     "url": "./static/js/taxonomy-browser.js"
   },
   {
-    "revision": "458fc68ed89af775ba8d",
+    "revision": "8f90b832a7d4fe2c0f9d",
     "url": "./static/css/taxonomy-browser.css"
   },
   {

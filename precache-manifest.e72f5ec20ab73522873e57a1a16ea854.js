@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "./static/media/dropdown-icon.0dadb5de.svg"
   },
   {
-    "revision": "8f90b832a7d4fe2c0f9d",
+    "revision": "6eb467fa483070e6e3d7",
     "url": "./static/js/taxonomy-browser.js"
   },
   {
-    "revision": "8f90b832a7d4fe2c0f9d",
+    "revision": "6eb467fa483070e6e3d7",
     "url": "./static/css/taxonomy-browser.css"
   },
   {
-    "revision": "1f58fae37a9747fbcde6526746e9cfbc",
+    "revision": "948d106241dd1999dcd27cbc66bdf8c6",
     "url": "./index.html"
   }
 ];

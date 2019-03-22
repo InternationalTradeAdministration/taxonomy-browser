@@ -11,7 +11,10 @@ class Footer extends Component {
   }
 
   toggleJson = () => {
-    this.setState({ jsonToggle: !this.state.jsonToggle});
+    this.setState({ jsonToggle: !this.state.jsonToggle}, () => {
+      let jsonButton = document.getElementById('jsonButton');
+      jsonButton.scrollIntoView({behavior: 'smooth'});
+    });
   }
 
   render() {
@@ -19,7 +22,7 @@ class Footer extends Component {
       <div className="footer">
         <h3>For Developers</h3> <br/>
 
-        <button onClick={this.toggleJson}>JSON</button> {/* reveals a collapsible div which shows the contents of this.props.json */}
+        <button onClick={this.toggleJson} id="jsonButton">View JSON</button>
         <a download="ITA Taxonomy Definitions - External 032519.xlsx" href="ITA Taxonomy Definitions - External 032519.xlsx">
           Download Taxonomy <img src={downloadIcon} alt="download" />
         </a>

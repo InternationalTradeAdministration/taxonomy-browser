@@ -3,8 +3,9 @@
   "main.js": "./static/js/taxonomy-browser.js",
   "main.js.map": "./static/js/taxonomy-browser.js.map",
   "static/media/taxonomy-browser.css": "./static/media/dropdown-icon.0dadb5de.svg",
+  "static/media/download.svg": "./static/media/download.a6483469.svg",
   "static/css/taxonomy-browser.css.map": "./static/css/taxonomy-browser.css.map",
   "index.html": "./index.html",
-  "precache-manifest.c7a2022d0ad7e22678764930d509485b.js": "./precache-manifest.c7a2022d0ad7e22678764930d509485b.js",
+  "precache-manifest.5323da2c23dab80ace77e3f898897449.js": "./precache-manifest.5323da2c23dab80ace77e3f898897449.js",
   "service-worker.js": "./service-worker.js"
 }

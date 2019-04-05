@@ -12,7 +12,7 @@ The thesaurus is structured into six domains or micro-thesauri:
 * Trade Regions
 * U.S. Trade Initiatives
 
-The thesaurus is available to the software developer community as a JSON endpoint, the documentation for which is available here; https://developer.trade.gov/ita-taxonomies.html
+The thesaurus is available to the software developer community as a JSON endpoint, the documentation for which is available here: https://developer.trade.gov/ita-taxonomies.html
 
 The thesaurus was developed by ITA’s staff of international trade specialists, consulting several authoritative sources and vocabularies covering the language of international trade and investment.
 
@@ -35,6 +35,20 @@ The thesaurus was developed by ITA’s staff of international trade specialists,
 
 3. Input the appropriate API_KEY and div ID into the script.
 4. Place the element `<div id="taxonomy_container"></div>` where the taxonomy container should appear in the `<body>`.
+
+## Run locally
+  * Install dependencies with `npm install`.
+  * Then, `npm run start` launches the app in development mode, with changes viewable at [http://localhost:3000](http://localhost:3000).  
+    * The page will reload if you make edits.<br>
+    * You will also see any lint errors in the console.
+
+## Running tests
+In one terminal tab, launch server with `npm run start`.  
+In another terminal tab, launch tests with `npm run test`.  
+Expect the suite to pass within 10 seconds (depending on network speed).
+
+## Build and Deploy to GitHub Pages
+`npm run build && npm run deploy`
 
 ## Additional Info
 * This project was bootstrapped with Create React App, and has been ejected to enable customization of webpack.

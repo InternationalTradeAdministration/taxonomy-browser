@@ -1,76 +1,78 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import Autocomplete from 'react-autocomplete';
+import Select from 'react-select';
+import createFilterOptions from 'react-select-fast-filter-options';
+// import { createSelector } from 'reselect';
+import { SimpleTokenizer, StemmingTokenizer, TfIdfSearchIndex, AllSubstringsIndexStrategy } from 'js-search';
+import { stemmer } from 'porter-stemmer';
 import Footer from './Footer';
 import '../taxonomy-browser.css';
+
+const searchIndex = new TfIdfSearchIndex();
+const indexStrategy = new AllSubstringsIndexStrategy();
+const tokenizer = new StemmingTokenizer(stemmer, new SimpleTokenizer());
 
 class SearchBar extends Component {
   constructor() {
     super()
     this.state = {
       queryString: "",
-      autosuggestions: [],
+      itemOptions: [],
       selectedTopic: "",
       footerData: {},
     }
-    this.handleChangeTopic = this.handleChangeTopic.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.onSelectSuggestion = this.onSelectSuggestion.bind(this);
-    this.renderItem = this.renderItem.bind(this);
-    this.getItemValue = this.getItemValue.bind(this);
-    this.retrieveSuggestions = this.retrieveSuggestions.bind(this);
+    this.handleChangeTopic = this.handleChangeTopic.bind(this);
   };
 
-  handleChange(event) {
-    const { name, value } = event.target;
-    this.setState({ [name]: value }, this.initiateSuggestions);
+  handleChange(value) {
+    // this.setState({ queryString: value.label }, () => {
+    //   this.props.history.push({ pathname: `/search`, search: `&q=${this.state.queryString}&types=${this.state.selectedTopic}` });
+    //   /* this submits search when the selection is selected with "Enter", as per [EDSP-646] */
+    // });
+    this.setState({ queryString: value.label })
   };
 
   handleChangeTopic(e) {
     this.setState({selectedTopic: e.target.value}, () => {
-      return this.initiateSuggestions;
+      return this.fetchOptions;
     });
   };
 
-  initiateSuggestions = () => {
-    if (this.state.queryString.length > 1) {
-      this.retrieveSuggestions(this.state.queryString);
-    } else {
-      this.setState({ autosuggestions: [] })
-    }
-  }
-
-  onSelectSuggestion(val){
-    this.setState({ queryString: val }, () => {
-      this.props.history.push({ pathname: `/search`, search: `&q=${this.state.queryString}&types=${this.state.selectedTopic}` });
-    });
-  };
-
-  retrieveSuggestions(value) {
-    this.setState({autosuggestions: []});
-    let searchUrl = (
-      `${this.props.BASE_URL}/ita_taxonomies/search?api_key=${this.props.API_KEY}&q=${value}&types=${this.state.selectedTopic}`
-    );
-    fetch(searchUrl)
+  fetchOptions(size="") {
+    fetch(`${this.props.BASE_URL}/ita_taxonomies/search?api_key=${this.props.API_KEY}&types=${this.state.selectedTopic}&size=${size}`)
     .then(response => response.json())
-    .then(response => this.setState({autosuggestions: response.results}))
+    .then(response => this.setState({
+      itemOptions: response.results
+    }));
   }
 
-  getItemValue(item) {
-    return `${item.label}`
+  componentDidMount() {
+    this.fetchOptions('-1');
   }
 
-  renderItem(item, isHighlighted){
-    return (
-      <div key={item.id} style={{ background: isHighlighted ? 'lightblue' : 'white', textAlign: 'left', 'paddingTop': '5px', 'paddingBottom': '5px' }}>
-        <Link to={{pathname: `/id/${item.id}`, state: {pageId: item.id}}} style={{ 'textDecoration': 'none', 'color': '#292a2b', 'fontSize': '11.5pt' }}>
-          {item.label}
-        </Link>
-      </div>
-    ); 
-  };
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.selectedTopic !== this.state.selectedTopic) { this.fetchOptions('-1') } // This doesn't work, still returns all 1618 items, not filtered by selectedTopic
+  }
+
+  // getIndexedOptions = () => createSelector(this.state.itemOptions, options =>
+  //   createFilterOptions({ 
+  //     options,
+  //     searchIndex,
+  //     indexStrategy,
+  //     tokenizer,  
+  //   })
+  // );
 
   render() {
+
+    let filterOptions = () => createFilterOptions({
+      options: this.state.itemOptions,
+      indexStrategy,
+      searchIndex,
+      tokenizer
+    })
+  
     return (
       <div>
         <h1>Thesaurus of International Trade Terms</h1>
@@ -87,21 +89,20 @@ class SearchBar extends Component {
               <option value="Trade Topics">Trade Topics</option>
             </select>
           </label>
-          <Autocomplete
-            inputProps = {{
-              type: 'text',
-              name: "queryString",
-              id: "queryString",
-              placeholder: "Enter search query",
-              'aria-label': "Enter search query",
-            }}
-            autoHighlight={false}
-            value={this.state.queryString}
-            items={this.state.autosuggestions} 
-            getItemValue={this.getItemValue}
-            renderItem={this.renderItem}
+          <Select 
+            name="queryString"
+            classNamePrefix="react-select"
+            id="queryString"
+            placeholder="Enter search query"
+            aria-label="Enter search query"
+            value={ {label: this.state.queryString} }
+            getOptionValue={option => option.label}
+            getOptionLabel={option => option.label}
+            options={this.state.itemOptions}
+            // filterOptions={this.getIndexedOptions}
+            filterOptions={filterOptions}
             onChange={this.handleChange}
-            onSelect={this.onSelectSuggestion}
+            styles={selectStyles}
           />
           <Link to={{pathname: `/search`, search: `&q=${this.state.queryString}&types=${this.state.selectedTopic}`}}>
             <button>Search</button>
@@ -126,3 +127,50 @@ class SearchBar extends Component {
 }
 
 export default withRouter(SearchBar);
+
+const selectStyles = {
+  container: (provided) => ({
+    ...provided,
+    display: 'inline-block',
+    width: '250px',
+    minHeight: '1px',
+    textAlign: 'left',
+    border: 'none',
+  }),
+  control: (provided) => ({
+    ...provided,
+    border: '2px solid #757575',
+    borderRadius: '0',
+    minHeight: '1px',
+    height: '42px',
+    marginLeft: '5px',
+  }),
+  dropdownIndicator: (provided) => ({
+    ...provided,
+    display: 'none',
+  }),
+  indicatorSeparator: (provided) => ({
+    ...provided,
+    display: 'none',
+  }),
+  valueContainer: (provided) => ({
+    ...provided,
+    minHeight: '1px',
+    height: '42px',
+    paddingTop: '0',
+    paddingBottom: '0',
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    minHeight: '1px',
+    paddingBottom: '7px',
+  }),
+  input: (provided) => ({
+    ...provided,
+    minHeight: '1px',
+  }),
+  placeholder: (provided) => ({
+    ...provided,
+    color: '#515151',
+  })
+}

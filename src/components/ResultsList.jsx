@@ -90,7 +90,7 @@ class ResultsList extends Component {
               return (
                 <li key={item.id}>
                   <Link to={{pathname: `/id/${item.id}`, state: {pageId: item.id}}}>
-                    {`${this.itemType(item)}${this.subTopic(item)}${item.label}`}
+                    <p className="breadcrumbs">{`${this.itemType(item)}${this.subTopic(item)}`}</p><p className="termLabel">{`${item.label}`}</p>
                   </Link>
                 </li>)
             })}

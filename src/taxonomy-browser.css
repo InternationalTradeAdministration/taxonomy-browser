@@ -109,7 +109,17 @@ select::-ms-expand {
 
 .taxonomy_container .resultsList li {
   list-style-type: none;
-  padding-bottom: 3px;
+  padding-bottom: 8px;
+}
+
+.taxonomy_container .resultsList li p.breadcrumbs {
+  font-size: 0.9em;
+  display: inline;
+  margin-right: auto;
+}
+
+.taxonomy_container .resultsList li p.termLabel {
+  display: inline;
 }
 
 .taxonomy_container .spinner {

@@ -30,10 +30,8 @@ class FloatingSearchBox extends Component {
     }
   }
 
-  onSelectSuggestion(val){
-    this.setState({ queryString: val }, () => {
-      this.props.history.push({ pathname: `/search`, search: `&q=${this.state.queryString}&types=` });
-    });
+  onSelectSuggestion(val, event){
+    this.props.history.push({ pathname: `/id/${event.id}`, state: {pageId: event.id} });
   };
 
   retrieveSuggestions(value) {

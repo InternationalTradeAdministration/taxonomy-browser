@@ -8,11 +8,11 @@ self.__precacheManifest = [
     "url": "./static/media/download.a6483469.svg"
   },
   {
-    "revision": "8d8f9376b7bbda65633d",
+    "revision": "49b3e184f826671482bc",
     "url": "./static/js/taxonomy-browser.js"
   },
   {
-    "revision": "8d8f9376b7bbda65633d",
+    "revision": "49b3e184f826671482bc",
     "url": "./static/css/taxonomy-browser.css"
   },
   {

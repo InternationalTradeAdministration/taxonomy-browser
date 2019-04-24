@@ -23,7 +23,7 @@ class Footer extends Component {
         <h3>For Developers</h3> <br/>
 
         <button onClick={this.toggleJson} id="jsonButton">View JSON</button>
-        <a download="ITA Taxonomy Definitions - External 032519.xlsx" href="ITA Taxonomy Definitions - External 032519.xlsx">
+        <a download="ITA Taxonomy Definitions - External 032519.xlsx" href="documents/ITA Taxonomy Definitions - External 032519.xlsx">
           Download Taxonomy <img src={downloadIcon} alt="download" />
         </a>
         

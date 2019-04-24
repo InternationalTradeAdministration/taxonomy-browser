@@ -266,7 +266,7 @@ select::-ms-expand {
   border: 2px solid black;
 }
 
-/* Footer (appears in ResultsList and TermInfo views) */
+/* Footer */
 
 .taxonomy_container pre {
   color: red;

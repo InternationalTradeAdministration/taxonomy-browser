@@ -37,6 +37,7 @@ The thesaurus was developed by ITA’s staff of international trade specialists,
 4. Place the element `<div id="taxonomy_container"></div>` where the taxonomy container should appear in the `<body>`.
 
 ## Run locally
+  * Install Node.js (this app was developed with LTS v8.16.0).
   * Install dependencies with `npm install`.
   * Then, `npm run start` launches the app in development mode, with changes viewable at [http://localhost:3000](http://localhost:3000).  
     * The page will reload if you make edits.<br>

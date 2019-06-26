@@ -11,7 +11,6 @@ class SearchBar extends Component {
       queryString: "",
       autosuggestions: [],
       selectedTopic: "",
-      footerData: {},
     }
     this.handleChangeTopic = this.handleChangeTopic.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -19,6 +18,7 @@ class SearchBar extends Component {
     this.renderItem = this.renderItem.bind(this);
     this.getItemValue = this.getItemValue.bind(this);
     this.retrieveSuggestions = this.retrieveSuggestions.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   };
 
   handleChange(event) {
@@ -68,21 +68,25 @@ class SearchBar extends Component {
     ); 
   };
 
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.history.push({pathname: `/search`, search: `&types=${this.state.selectedTopic}&q=${this.state.queryString}`});
+  }
+
   render() {
     return (
       <div>
         <h1>Thesaurus of International Trade Terms</h1>
         <p>The International Trade Administration’s (ITA) Thesaurus of International Trade Terms is a controlled and structured list of words and phrases used to tag and index information found on the ITA’s websites and databases. The thesaurus covers all subjects related to international trade and foreign investment with particular emphasis on exporting, trade promotion, market access and enforcement and compliance.</p>
 
-        <form onSubmit={(event) => event.preventDefault()} className="center taxonomy-search-form">
+        <form onSubmit={this.handleSubmit} className="center taxonomy-search-form">
           <label aria-label="Select a Category">
             <select value={this.state.selectedTopic} onChange={this.handleChangeTopic} className="dropdown">
               <option value="">All Categories</option>
+              <option value="Geographic Locations">Geographic Locations</option>
               <option value="Industries">Industries</option>
-              <option value="Countries">Countries</option>
-              <option value="World Regions">World Regions</option>
-              <option value="Trade Regions">Trade Regions</option>
               <option value="Trade Topics">Trade Topics</option>
+              <option value="U.S. Government">U.S. Government</option>
             </select>
           </label>
           <Autocomplete
@@ -101,23 +105,20 @@ class SearchBar extends Component {
             onChange={this.handleChange}
             onSelect={this.onSelectSuggestion}
           />
-          <Link to={{pathname: `/search`, search: `&q=${this.state.queryString}&types=${this.state.selectedTopic}`}}>
-            <button>Search</button>
-          </Link>
+          <button type="submit" aria-label="submit">Search</button>
         </form>
 
         <div className="categoryList">
           <p><b>Browse By: </b></p>
           <ul>
+            <li><Link to={{pathname: "/#id/RCM1PE2jExQ27PUY0a2WdxD"}}>Geographic Locations</Link></li>
             <li><Link to={{pathname: "/#id/R79uIjoQaQ9KzvJfyB1H7Ru"}}>Industries</Link></li>
-            <li><Link to={{pathname: "/#id/R8W91u35GBegWcXXFflYE4"}}>Countries</Link></li>
-            <li><Link to={{pathname: "/#id/R8cndKa2D8NuNg7djwJcXxB"}}>World Regions</Link></li>
-            <li><Link to={{pathname: "/#id/R7ySyiNxcfeZ6bfNjhocNun"}}>Trade Regions</Link></li>
             <li><Link to={{pathname: "/#id/RBBed4Voz7iS3nUECA3yzNM"}}>Trade Topics</Link></li>
+            <li><Link to={{pathname: "/#id/RBqqOvJ9rXMcmc5SDhGjWTp"}}>U.S. Government</Link></li>
           </ul>
         </div>
 
-        <Footer json={this.state.footerData}/>
+        <Footer/>
       </div>
     )
   }

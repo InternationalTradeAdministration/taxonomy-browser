@@ -12,10 +12,15 @@ class TermInfo extends Component {
     this.state = {
       item: {
         type: [],
-        sub_class_of: [{}],
+        sub_class_of: [{}], // unused
         annotations: {},
         related_terms: {}, // unused
-        object_properties: { member_of: [{}], has_related: [{}], has_broader: [{}], has_narrower: [{}], has_member: [{}], is_in_scheme: [{}], is_top_concept_in_scheme: [{}], micro_thesaurus_of: [{}] },
+        object_properties: { 
+          member_of: [{}], has_member: [{}], main_concept_of: [{}], has_main_concept: [{}],
+          has_related: [{}], has_broader: [{}], has_narrower: [{}], 
+          is_in_scheme: [{}], is_top_concept_in_scheme: [{}], micro_thesaurus_of: [{}], 
+          sub_group: [{}], super_group: [{}], "iso_thes:super_groupsuper_group": [{}] 
+        },
       },
       errorMessage: "",
       loading: false,
@@ -24,6 +29,7 @@ class TermInfo extends Component {
 
   targetUrl = () => {
     const id =  this.props.match.params.id;
+    // console.log(`fetching from: ${this.props.BASE_URL}/ita_taxonomies/?api_key=${this.props.API_KEY}${id}`);
     return `${this.props.BASE_URL}/ita_taxonomies/${id}?api_key=${this.props.API_KEY}`;
   };
 
@@ -50,32 +56,16 @@ class TermInfo extends Component {
 
   render() {
     const {
-      label,
       type,
       annotations,
-      sub_class_of,
       object_properties,
-      // related_terms,
     } = this.state.item;
-
-    const subTopic = () => {  // "member_of" or "sub_class_of"
-      if (object_properties.member_of) return (<h2><Link to={{pathname: `/id/${object_properties.member_of[0].id}`}}>{object_properties.member_of[0].label}</Link> > </h2>)
-      else if (sub_class_of[0]) return (<h2><Link to={{pathname: `/id/${sub_class_of[0].id}`}}>{sub_class_of[0].label}</Link> > </h2>)
-      else return null
-    };
-
-    const description = () => {
-      if (annotations.definition) { return (<p><b>Description: </b>{annotations.definition}</p>) }
-      else if (annotations.scope_note) { return (<p><b>Description: </b>{annotations.scope_note}</p>) }
-      else if (annotations.comment) { return (<p><b>Description: </b>{annotations.comment}</p>) }
-      else return null
-    };
 
     const sortedTerms = (attribute) => {
       if (attribute) {
         return attribute.sort(function(a, b) {
-          if (a.label < b.label) { return -1 }
-          if (a.label > b.label) { return 1 }
+          if (a.label.toLowerCase() < b.label.toLowerCase()) { return -1 }
+          if (a.label.toLowerCase() > b.label.toLowerCase()) { return 1 }
           return 0;
         }).map((t, i) => {
           return <li key={i}><Link to={{pathname: `/id/${t.id}`}}>{t.label}</Link></li>          
@@ -83,23 +73,29 @@ class TermInfo extends Component {
       } else return null
     };
 
-    const narrowerTerms = () => {
-      if (object_properties.has_narrower) { return sortedTerms(object_properties.has_narrower) } 
-      else if (object_properties.has_member) { return sortedTerms(object_properties.has_member) } 
-      else return null
-    };
+    const termLabel = (item) => {
+      if (item.annotations.pref_label) {
+        return item.annotations.pref_label
+      } else {
+        return item.label
+      }
+    }
+  
+    const topConcepts = () => {
+      if (object_properties.has_main_concept) {
+        return sortedTerms(object_properties.has_main_concept)
+      } else if (object_properties.has_member) {
+        return sortedTerms(object_properties.has_member)
+      }
+    }
 
-    const memberOfConceptGroup = () => {  // "type", "member_of", or "sub_class_of"
-      if (type.length > 0) {
-        return (type.map((t, i) => <Link to={{pathname: `/id/${topics[t].id}`}} key={i}>{t}</Link>))
+    const topConceptOf = () => {
+      if (object_properties.main_concept_of) {
+        return sortedTerms(object_properties.main_concept_of)
       } else if (object_properties.member_of) {
-        return <Link to={{pathname: `/id/${object_properties.member_of[0].id}`}}>{object_properties.member_of[0].label}</Link>
-      } else if (sub_class_of.length > 0) {
-        return (sub_class_of.map((t, i) => {
-          return <Link to={{pathname: `/id/${t.id}`}} key={i}>{t.label}</Link>
-        }) )      
-      } else return null
-    };
+        return sortedTerms(object_properties.member_of)
+      }
+    }
 
     return (
       <div>
@@ -108,67 +104,95 @@ class TermInfo extends Component {
         { this.state.loading ? (<div className="spinner"><Loader type="ThreeDots" color="#00CC66" width="100"/></div>) : (
           <>
             <div className="breadcrumbs">
-              {/* Top Level */} <h4><Link to={{pathname: `/`}}>ITA Thesaurus</Link> > </h4>
-              {/* Type or Topic */} {(type.length > 0) ? (<h3><Link to={{pathname: `/id/${topics[type[0]].id}`}}>{type[0]}</Link> > </h3>) : null} 
-              {/* SubTopic */} {subTopic()}                              
-              {/* Term */} <h1>{label}</h1>
+              <h3><Link to={{pathname: `/`}}>ITA Thesaurus</Link> > </h3>
+
+              {(type.length > 0) ? (<h3><Link to={{pathname: `/id/${topics[type[0]].id}`}}>{type[0]}</Link> > </h3>) : null}
+
+              <h3>{termLabel(this.state.item)}</h3>
             </div>
 
+            <h1>{termLabel(this.state.item)}</h1>
+
             <div className="termInfo">
-              <span><h2>Term Information</h2></span>
-                {annotations.pref_label ? (<p><b>Preferred Term: </b>{annotations.pref_label}</p>) : null}
-                {annotations.alt_label ? (<p><b>Alternative term: </b>{annotations.alt_label}</p>) : null}
-                {description()}
-                {annotations.source ? (<p><b>Term Source: </b>{annotations.source}</p>) : null}
+              { annotations.definition ? (
+                <><h4>Description</h4><p>{annotations.definition}</p></>
+              ) : null }
+              { annotations.scope_note ? (
+                <><h4>Scope Note</h4><p>{annotations.scope_note}</p></>
+              ) : null }
+              { annotations.alt_label ? (
+                <><h4>Used for</h4><p>{annotations.alt_label}</p></>
+              ) : null}
+              { object_properties.sub_group ? (
+                <>
+                  <h4>Concept Groups</h4>
+                  <ul>{object_properties.sub_group.map((t, i) => <li key={i}><Link to={{pathname: `/id/${t.id}`}}>{t.label}</Link></li> )}</ul>
+                </>
+              ) : null }
+
+              { object_properties.super_group ? (
+                <>
+                  <h4>Member of Concept Group</h4> 
+                  <ul>{object_properties.super_group.map((t, i) => <li key={i}>{t.label}</li> )}</ul>
+                </>
+              ) : null }
+
+              { (object_properties.has_main_concept || object_properties.has_member) ? (
+                <>
+                  <h4>Top Concepts</h4>
+                  <ul>{topConcepts()}</ul>
+                </>
+              ) : null }
+
+              { (object_properties.main_concept_of || object_properties.member_of) ? (
+                <>
+                  <h4>Top Concept of</h4>
+                  <ul>{topConceptOf()}</ul>
+                </>
+              ) : null }
+
             </div>
 
             <div className="termRelation">
-              <span><h2>Term Relationships</h2></span>
-              <div className="broader">
-                <b><p>Broader terms: </p></b>
-                <ul>
-                  {sortedTerms(object_properties.has_broader)}
-                </ul>
-              </div>
-            
-              <img src={arrow} alt="arrow pointing right"/>
 
-              <div className="related">
-                <b><p>Related terms: </p></b>
-                <ul>
-                  {sortedTerms(object_properties.has_related)}
-                </ul>
-              </div>
+              { object_properties.has_broader ? (
+                <div className="broader">
+                  <b><p>Broader terms: </p></b>
+                  <ul>
+                    {sortedTerms(object_properties.has_broader)}
+                  </ul>
+                </div>) : null }
 
-              <img src={arrow} alt="arrow pointing right"/>
+              { ((object_properties.has_broader && object_properties.has_related) || (object_properties.has_broader && object_properties.has_narrower)) ? (
+                <img src={arrow} alt="arrow pointing right"/>
+              ) : null }
 
-              <div className="narrower">
-                <b><p>Narrower Terms: </p></b>
-                <ul>
-                  {narrowerTerms()}
-                </ul>
-              </div>
+              { object_properties.has_related ? (
+                <div className="related">
+                  <b><p>Related terms: </p></b>
+                  <ul>
+                    {sortedTerms(object_properties.has_related)}
+                  </ul>
+                </div>
+              ) : null }
+
+              { (object_properties.has_related && object_properties.has_narrower) ? (
+                <img src={arrow} alt="arrow pointing right"/>
+              ) : null }
+
+              { object_properties.has_narrower ? (
+                <div className="narrower">
+                  <b><p>Narrower Terms: </p></b>
+                  <ul>
+                    {sortedTerms(object_properties.has_narrower)}
+                  </ul>
+                </div>
+              ) : null }
+
             </div>
 
             <hr/>
-
-            <div className="superTerms">
-              {memberOfConceptGroup() ? (
-                <p><b>Member of Concept Group: </b>{memberOfConceptGroup()}</p>
-              ) : null}
-          
-              {object_properties.is_top_concept_in_scheme ? (
-                <p><b>Top Term of: </b> {object_properties.is_top_concept_in_scheme.map((t) => {
-                  return t.label })}</p> 
-              ) : null }
-            
-              {(object_properties.micro_thesaurus_of) ? (
-                <p><b>Microthesaurus of: </b>{object_properties.micro_thesaurus_of[0].label}</p>
-              ) : null }
-
-            </div>
-            
-            <Footer json={this.state.item}/>
+            <Footer />
           </>
         )}
       </div>

@@ -11,7 +11,6 @@ class SearchBar extends Component {
       queryString: "",
       autosuggestions: [],
       selectedTopic: "",
-      footerData: {},
     }
     this.handleChangeTopic = this.handleChangeTopic.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -101,7 +100,7 @@ class SearchBar extends Component {
             onChange={this.handleChange}
             onSelect={this.onSelectSuggestion}
           />
-          <Link to={{pathname: `/search`, search: `&q=${this.state.queryString}&types=${this.state.selectedTopic}`}}>
+          <Link to={{pathname: `/search`, search: `&types=${this.state.selectedTopic}&q=${this.state.queryString}`}}>
             <button>Search</button>
           </Link>
         </form>
@@ -117,7 +116,7 @@ class SearchBar extends Component {
           </ul>
         </div>
 
-        <Footer json={this.state.footerData}/>
+        <Footer/>
       </div>
     )
   }

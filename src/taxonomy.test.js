@@ -43,18 +43,20 @@ test('user can search based on text input', async () => {
   await page.click(firstResult);
 
   // arrive on the TermInfo page, identify concept group
-  const termInfoLabel = '.taxonomy_container .breadcrumbs h1';
+  const termInfoLabel = '.taxonomy_container .breadcrumbs h3:nth-of-type(3)';
   await page.waitForSelector(termInfoLabel, 30000);
-  const conceptGroup = '.taxonomy_container .superTerms > p > a';
+  const conceptGroup = '.taxonomy_container .termRelation > .broader > ul > li > a';
   await page.waitForSelector(conceptGroup, 10000);
-  const ITA_home = '.taxonomy_container .breadcrumbs > h4 > a';
+  const conceptGroupText = await page.$eval(conceptGroup, e => e.innerHTML);
+  expect(conceptGroupText).toBe('Banks');
+  const ITA_home = '.taxonomy_container .breadcrumbs > h3 > a';
   await page.waitForSelector(ITA_home, 10000);
   await page.click(ITA_home);
 });
 
 test('user can search based on a selected category', async () => {
   
-  // click the "Industries" box, then click Search button
+  // select the "Industries" option, then click Search button
   const SelectMenu = '.taxonomy_container .dropdown';
   const searchButton = '.taxonomy_container form button';
   await page.waitForSelector(SelectMenu, 30000)
@@ -74,11 +76,13 @@ test('user can search based on a selected category', async () => {
 
   // arrive on the TermInfo page, identify concept group
   // await page.screenshot({path: 'screenshot.png'})
-  const termInfoLabel2 = '.taxonomy_container .breadcrumbs h1';
+  const termInfoLabel2 = '.taxonomy_container .breadcrumbs h3:nth-of-type(3)';
   await page.waitForSelector(termInfoLabel2, 20000);
-  const conceptGroup = '.taxonomy_container .superTerms > p > a';
-  await page.waitForSelector(conceptGroup, 10000);
-  const ITA_home = '.taxonomy_container .breadcrumbs > h4 > a';
+  const topConceptOf = '.taxonomy_container div.termInfo > ul > li > a';
+  await page.waitForSelector(topConceptOf, 10000);
+  const conceptGroupText = await page.$eval(topConceptOf, e => e.innerHTML);
+  expect(conceptGroupText).toBe('Product Class');
+  const ITA_home = '.taxonomy_container .breadcrumbs > h3 > a';
   await page.waitForSelector(ITA_home, 10000);
   await page.click(ITA_home);
 });

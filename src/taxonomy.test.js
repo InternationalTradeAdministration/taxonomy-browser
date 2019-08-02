@@ -78,10 +78,10 @@ test('user can search based on a selected category', async () => {
   // await page.screenshot({path: 'screenshot.png'})
   const termInfoLabel2 = '.taxonomy_container .breadcrumbs h3:nth-of-type(3)';
   await page.waitForSelector(termInfoLabel2, 20000);
-  const topConceptOf = '.taxonomy_container div.termInfo > ul > li > a';
-  await page.waitForSelector(topConceptOf, 10000);
-  const conceptGroupText = await page.$eval(topConceptOf, e => e.innerHTML);
-  expect(conceptGroupText).toBe('Product Class');
+  const usedFor = '.taxonomy_container div.termInfo > ul > li';
+  await page.waitForSelector(usedFor, 10000);
+  const conceptGroupText = await page.$eval(usedFor, e => e.innerHTML);
+  expect(conceptGroupText).toBe('Air Traffic Management Equipment');
   const ITA_home = '.taxonomy_container .breadcrumbs > h3 > a';
   await page.waitForSelector(ITA_home, 10000);
   await page.click(ITA_home);

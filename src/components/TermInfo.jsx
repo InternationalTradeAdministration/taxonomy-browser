@@ -12,14 +12,12 @@ class TermInfo extends Component {
     this.state = {
       item: {
         type: [],
-        sub_class_of: [{}], // unused
         annotations: {},
-        related_terms: {}, // unused
         object_properties: { 
           member_of: [{}], has_member: [{}], main_concept_of: [{}], has_main_concept: [{}],
           has_related: [{}], has_broader: [{}], has_narrower: [{}], 
           is_in_scheme: [{}], is_top_concept_in_scheme: [{}], micro_thesaurus_of: [{}], 
-          sub_group: [{}], super_group: [{}], "iso_thes:super_groupsuper_group": [{}] 
+          sub_group: [{}], super_group: [{}], "iso_thes:super_group": [{}] 
         },
       },
       errorMessage: "",
@@ -29,7 +27,7 @@ class TermInfo extends Component {
 
   targetUrl = () => {
     const id =  this.props.match.params.id;
-    // console.log(`fetching from: ${this.props.BASE_URL}/ita_taxonomies/?api_key=${this.props.API_KEY}${id}`);
+    // console.log(`fetching from: ${this.props.BASE_URL}/ita_taxonomies/${id}?api_key=${this.props.API_KEY}`);
     return `${this.props.BASE_URL}/ita_taxonomies/${id}?api_key=${this.props.API_KEY}`;
   };
 
@@ -90,8 +88,8 @@ class TermInfo extends Component {
     }
 
     const topConceptOf = () => {
-      if (object_properties.main_concept_of) {
-        return sortedTerms(object_properties.main_concept_of)
+      if (object_properties.is_main_concept_in_collection) {
+        return sortedTerms(object_properties.is_main_concept_in_collection)
       } else if (object_properties.member_of) {
         return sortedTerms(object_properties.member_of)
       }
@@ -106,7 +104,7 @@ class TermInfo extends Component {
             <div className="breadcrumbs">
               <h3><Link to={{pathname: `/`}}>ITA Thesaurus</Link> > </h3>
 
-              {(type.length > 0) ? (<h3><Link to={{pathname: `/id/${topics[type[0]].id}`}}>{type[0]}</Link> > </h3>) : null}
+              {!!(type[0]) ? (<h3><Link to={{pathname: `/id/${topics[type[0]].id}`}}>{type[0]}</Link> > </h3>) : null}
 
               <h3>{termLabel(this.state.item)}</h3>
             </div>
@@ -115,25 +113,37 @@ class TermInfo extends Component {
 
             <div className="termInfo">
               { annotations.definition ? (
-                <><h4>Description</h4><p>{annotations.definition}</p></>
-              ) : null }
-              { annotations.scope_note ? (
-                <><h4>Scope Note</h4><p>{annotations.scope_note}</p></>
-              ) : null }
-              { annotations.alt_label ? (
-                <><h4>Used for</h4><p>{annotations.alt_label}</p></>
-              ) : null}
-              { object_properties.sub_group ? (
                 <>
-                  <h4>Concept Groups</h4>
-                  <ul>{object_properties.sub_group.map((t, i) => <li key={i}><Link to={{pathname: `/id/${t.id}`}}>{t.label}</Link></li> )}</ul>
+                  <h4>Description</h4>
+                  {annotations.definition.map((t, i) => <p key={i}>{t}</p>)}
+                </>
+              ) : null }
+              
+              { annotations.scope_note ? (
+                <>
+                  <h4>Scope Note</h4>
+                  {annotations.scope_note.map((t, i) => <p key={i}>{t}</p>)}
                 </>
               ) : null }
 
-              { object_properties.super_group ? (
+              { annotations.alt_label ? (
                 <>
-                  <h4>Member of Concept Group</h4> 
-                  <ul>{object_properties.super_group.map((t, i) => <li key={i}>{t.label}</li> )}</ul>
+                  <h4>Used for</h4>
+                  <ul>{annotations.alt_label.map((t, i) => <li key={i}>{t}</li>)}</ul>
+                </>
+              ) : null}
+
+              { object_properties.sub_group ? (
+                <>
+                  <h4>Concept Groups</h4>
+                  <ul>{sortedTerms(object_properties.sub_group)}</ul>
+                </>
+              ) : null }
+
+              { object_properties["iso_thes:super_group"] ? (
+                <>
+                  <h4>Member of Concept Group</h4>
+                  <ul>{sortedTerms(object_properties["iso_thes:super_group"])}</ul>
                 </>
               ) : null }
 
@@ -144,13 +154,12 @@ class TermInfo extends Component {
                 </>
               ) : null }
 
-              { (object_properties.main_concept_of || object_properties.member_of) ? (
+              { (object_properties.is_main_concept_in_collection || object_properties.member_of) ? (
                 <>
                   <h4>Top Concept of</h4>
                   <ul>{topConceptOf()}</ul>
                 </>
               ) : null }
-
             </div>
 
             <div className="termRelation">

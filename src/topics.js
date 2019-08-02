@@ -4,7 +4,8 @@ export const topics = {
   "World Regions": { id: "R8cndKa2D8NuNg7djwJcXxB" },
   "Trade Regions": { id: "R7ySyiNxcfeZ6bfNjhocNun" },
   "Trade Topics": { id: "RBBed4Voz7iS3nUECA3yzNM" },
-  // "US Trade Initiatives": { id: "RBqqOvJ9rXMcmc5SDhGjWTp" },
+  "U.S. States and Territories": { id: "Rqdpj5QSp8PxZGtrXuOpdK" },
+  "U.S. Government": { id: "RBqqOvJ9rXMcmc5SDhGjWTp" },
 }
 
 export default topics;

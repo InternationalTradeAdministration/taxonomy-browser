@@ -77,11 +77,10 @@ class SearchBar extends Component {
           <label aria-label="Select a Category">
             <select value={this.state.selectedTopic} onChange={this.handleChangeTopic} className="dropdown">
               <option value="">All Categories</option>
+              <option value="Geographic Locations">Geographic Locations</option>
               <option value="Industries">Industries</option>
-              <option value="Countries">Countries</option>
-              <option value="World Regions">World Regions</option>
-              <option value="Trade Regions">Trade Regions</option>
               <option value="Trade Topics">Trade Topics</option>
+              <option value="U.S. Government">U.S. Government</option>
             </select>
           </label>
           <Autocomplete
@@ -108,11 +107,10 @@ class SearchBar extends Component {
         <div className="categoryList">
           <p><b>Browse By: </b></p>
           <ul>
+            <li><Link to={{pathname: "/#id/RCM1PE2jExQ27PUY0a2WdxD"}}>Geographic Locations</Link></li>
             <li><Link to={{pathname: "/#id/R79uIjoQaQ9KzvJfyB1H7Ru"}}>Industries</Link></li>
-            <li><Link to={{pathname: "/#id/R8W91u35GBegWcXXFflYE4"}}>Countries</Link></li>
-            <li><Link to={{pathname: "/#id/R8cndKa2D8NuNg7djwJcXxB"}}>World Regions</Link></li>
-            <li><Link to={{pathname: "/#id/R7ySyiNxcfeZ6bfNjhocNun"}}>Trade Regions</Link></li>
             <li><Link to={{pathname: "/#id/RBBed4Voz7iS3nUECA3yzNM"}}>Trade Topics</Link></li>
+            <li><Link to={{pathname: "/#id/RBqqOvJ9rXMcmc5SDhGjWTp"}}>U.S. Government</Link></li>
           </ul>
         </div>
 

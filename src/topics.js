@@ -6,6 +6,7 @@ export const topics = {
   "Trade Topics": { id: "RBBed4Voz7iS3nUECA3yzNM" },
   "U.S. States and Territories": { id: "Rqdpj5QSp8PxZGtrXuOpdK" },
   "U.S. Government": { id: "RBqqOvJ9rXMcmc5SDhGjWTp" },
+  "Geographic Locations":  { id: "RCM1PE2jExQ27PUY0a2WdxD" },
 }
 
 export default topics;

@@ -18,6 +18,7 @@ class SearchBar extends Component {
     this.renderItem = this.renderItem.bind(this);
     this.getItemValue = this.getItemValue.bind(this);
     this.retrieveSuggestions = this.retrieveSuggestions.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   };
 
   handleChange(event) {
@@ -67,13 +68,18 @@ class SearchBar extends Component {
     ); 
   };
 
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.history.push({pathname: `/search`, search: `&types=${this.state.selectedTopic}&q=${this.state.queryString}`});
+  }
+
   render() {
     return (
       <div>
         <h1>Thesaurus of International Trade Terms</h1>
         <p>The International Trade Administration’s (ITA) Thesaurus of International Trade Terms is a controlled and structured list of words and phrases used to tag and index information found on the ITA’s websites and databases. The thesaurus covers all subjects related to international trade and foreign investment with particular emphasis on exporting, trade promotion, market access and enforcement and compliance.</p>
 
-        <form onSubmit={(event) => event.preventDefault()} className="center taxonomy-search-form">
+        <form onSubmit={this.handleSubmit} className="center taxonomy-search-form">
           <label aria-label="Select a Category">
             <select value={this.state.selectedTopic} onChange={this.handleChangeTopic} className="dropdown">
               <option value="">All Categories</option>
@@ -99,9 +105,7 @@ class SearchBar extends Component {
             onChange={this.handleChange}
             onSelect={this.onSelectSuggestion}
           />
-          <Link to={{pathname: `/search`, search: `&types=${this.state.selectedTopic}&q=${this.state.queryString}`}}>
-            <button>Search</button>
-          </Link>
+          <button type="submit" aria-label="submit">Search</button>
         </form>
 
         <div className="categoryList">

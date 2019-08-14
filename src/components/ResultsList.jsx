@@ -4,6 +4,7 @@ import Pagination from 'react-js-pagination';
 import Loader from 'react-loader-spinner';
 import FloatingSearchBox from './FloatingSearchBox';
 import Footer from './Footer';
+
 class ResultsList extends Component {
   constructor(props) {
     super(props)
@@ -55,19 +56,19 @@ class ResultsList extends Component {
     if (item.type.length > 0) {return (`${item.type[0]} > `)}
   }
 
-  subTopic(item) {  // "member_of" or "sub_class_of"
-    if (item.object_properties.member_of) return (
-        `${item.object_properties.member_of[0].label} > `
-      )
-    else if (item.sub_class_of[0]) return (`${item.sub_class_of[0].label} > `)
-    else return null
-  };
+  termLabel(item) {
+    if (item.annotations.pref_label) {
+      return item.annotations.pref_label
+    } else {
+      return item.label
+    }
+  }
 
   sortedItems(items) {
     if (items) {
       return items.sort(function(a, b) {
-        if (a.label < b.label) { return -1 }
-        if (a.label > b.label) { return 1 }
+        if (a.label.toLowerCase() < b.label.toLowerCase()) { return -1 }
+        if (a.label.toLowerCase() > b.label.toLowerCase()) { return 1 }
         return 0;
       })
     } else return null
@@ -90,7 +91,8 @@ class ResultsList extends Component {
               return (
                 <li key={item.id}>
                   <Link to={{pathname: `/id/${item.id}`, state: {pageId: item.id}}}>
-                    <p className="breadcrumbs">{`${this.itemType(item)}${this.subTopic(item)}`}</p><p className="termLabel">{`${item.label}`}</p>
+                    <p className="breadcrumbs">{ this.itemType(item) ? `${this.itemType(item)}` : null }</p>
+                    <p className="termLabel">{`${this.termLabel(item)}`}</p>
                   </Link>
                 </li>)
             })}
@@ -109,7 +111,7 @@ class ResultsList extends Component {
           />
         ) : null }
         <br />
-        <Footer json={this.state.footerData}/>
+        <Footer/>
       </div>
     );
   }

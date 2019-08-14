@@ -1,21 +1,39 @@
-import React from 'react';
+import React, {Component} from 'react';
+import JSONPretty from 'react-json-pretty';
 import downloadIcon from '../images/download.svg';
-import openInNewIcon from '../images/open_in_new.svg';
 
-const Footer = () => {
+class Footer extends Component {
+  constructor() {
+    super()
+    this.state = {
+      jsonToggle: false,
+    }
+  }
 
+  toggleJson = () => {
+    this.setState({ jsonToggle: !this.state.jsonToggle}, () => {
+      let jsonButton = document.getElementById('jsonButton');
+      jsonButton.scrollIntoView({behavior: 'smooth'});
+    });
+  }
+
+  render() {
     return (
       <div className="footer">
-        <h3>For Developers</h3>
+        <h3>For Developers</h3> <br/>
 
-        <a href="https://developer.trade.gov/ita-taxonomies.html" target="_blank" rel="noopener noreferrer" title="opens new tab">
-          Visit API Documentation  <img src={openInNewIcon} alt="opens new tab" />
+        <button onClick={this.toggleJson} id="jsonButton">View JSON</button>
+        <a download="ITA Taxonomy Definitions - External 032519.xlsx" href="documents/ITA Taxonomy Definitions - External 032519.xlsx">
+          Download Taxonomy <img src={downloadIcon} alt="download" />
         </a>
-        <a download="ITA Taxonomy Definitions - External 032519.xlsx" href="documents/ITA Taxonomy Definitions - External 032519.xlsx" title="download the file">
-          Download Taxonomy (92 kB) <img src={downloadIcon} alt="download the file" />
-        </a>
+        
+        <p>The thesaurus is available to the software developer community as a JSON endpoint.</p>
+        <p>The thesaurus was developed by ITA’s staff of international trade specialists, consulting several authoritative sources and vocabularies covering the language of international trade and investment.</p>
+        { this.state.jsonToggle ? <JSONPretty data={this.props.json} /> : null }
+
       </div>
     )
+  }
 }
 
 export default Footer;

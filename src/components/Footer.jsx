@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="footer">
         <h3>For Developers</h3>
 
-        <a href="https://developer.trade.gov/ita-taxonomies.html" target="_blank" rel="noopener noreferrer" title="opens new tab">
+        <a href="https://api.trade.gov/apps/store/ita/resources#ita-taxonomies-api" target="_blank" rel="noopener noreferrer" title="opens new tab">
           Visit API Documentation  <img src={openInNewIcon} alt="opens new tab" />
         </a>
         <a download="ITA Taxonomy Definitions - External 032519.xlsx" href="documents/ITA Taxonomy Definitions - External 032519.xlsx" title="download the file">

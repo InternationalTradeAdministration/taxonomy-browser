@@ -22,14 +22,16 @@ class ResultsList extends Component {
   searchUrl = () =>  {
     const size = this.state.itemsPerPage;
     const searchParams = this.props.location.search;
-    return `${this.props.BASE_URL}/ita_taxonomies/search?api_key=${this.props.API_KEY}&size=${size}${searchParams}&offset=${(this.state.activePage-1)*(size)}`
+    return `${this.props.BASE_URL}/ita_taxonomies/search?size=${size}${searchParams}&offset=${(this.state.activePage-1)*(size)}`
 
   };
 
   fetchResults = () => {
     // console.log("ResultsList fetched from: " + this.searchUrl());
     this.setState({loading: true}, () => {
-      fetch(this.searchUrl())
+      fetch(this.searchUrl(), {
+        headers: { 'Authorization': 'Bearer ' + this.props.ACCESS_TOKEN }
+      })
       .then(response => response.json())
       .then(response => this.setState({ results: response.results, footerData: response, numberOfResults: response.total, offset: response.offset, loading: false }))
       .catch(error => console.log(error), (error) => {

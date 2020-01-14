@@ -2,16 +2,19 @@ import 'react-app-polyfill/ie11'; // this polyfill needs to be first for IE11 su
 import 'babel-polyfill'; // necessary for IE11 support for Router
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import './taxonomy-browser.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
- 
+
+export const history = createBrowserHistory();
+
 function renderTaxonomy(BASE_URL, API_KEY, divID) {
   ReactDOM.render(
-    <HashRouter hashType="noslash">
+    <Router history={history}>
       <App BASE_URL={BASE_URL} API_KEY={API_KEY}/>
-    </HashRouter>,
+    </Router>,
     document.getElementById(divID)
   );  
 }

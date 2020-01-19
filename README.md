@@ -12,7 +12,7 @@ The thesaurus is structured into six domains or micro-thesauri:
 * Trade Regions
 * U.S. Trade Initiatives
 
-The thesaurus is available to the software developer community as a JSON endpoint, the documentation for which is available here: https://developer.trade.gov/ita-taxonomies.html
+The thesaurus is available to the software developer community as a JSON endpoint, the documentation for which is available here: hhttps://api.trade.gov/apps/store/ita/resources#ita-taxonomies-api
 
 The thesaurus was developed by ITA’s staff of international trade specialists, consulting several authoritative sources and vocabularies covering the language of international trade and investment.
 

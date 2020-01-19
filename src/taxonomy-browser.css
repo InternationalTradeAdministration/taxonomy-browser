@@ -1,11 +1,11 @@
 .taxonomy_container {
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
   border: 0.75px solid lightgray;
   align-items: center;
   padding-right: 20px;
   padding-left: 20px;
-  margin-right: auto;
-  margin-left: auto;
+  margin-bottom: 3em;
   width: 1040px;
 }
 
@@ -22,10 +22,9 @@
 .taxonomy_container .center button {
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   display: inline-block;
-  vertical-align: top;
   font-size: 16px;
   line-height: 28px;
-  height: 42px;
+  height: 40px;
   padding-left: 5px;
   padding-right: 5px;
   margin-left: 5px;
@@ -45,7 +44,6 @@
 .taxonomy_container .center input[type=text] {
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   display: inline-block;
-  /* vertical-align: top; */
   margin-left: 5px;
   margin-top: 0;
   border: 2px solid #757575;
@@ -53,7 +51,7 @@
   font-size: 16px;
   padding-left: 5px;
   padding-right: 5px;
-  height: 36px;
+  height: 40px;
 }
 
 .taxonomy_container .center input[type=text]::placeholder {
@@ -66,7 +64,7 @@
 
 .taxonomy_container .dropdown {
   width: 200px;
-  height: 42px;
+  height: 40px;
   font-family: 'Lato', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
   text-align: left;
   padding-left: 5px;
@@ -128,20 +126,26 @@ select::-ms-expand {
 }
 
 .taxonomy_container ul.pagination li {
-  display: inline-block;
+  display: inline;
   text-align: center;
-  width: 20px;
   line-height: 24px;
   margin: 3px 7px;
 }
 
-.taxonomy_container ul.pagination li.active {
+.taxonomy_container ul.pagination li.active a:hover {
+  color: black;
+}
+
+.taxonomy_container ul.pagination li.active a {
+  background: none;
+  color: black;
   border-bottom: 2px solid black;
 }
 
 .taxonomy_container ul.pagination li a {
   color: black;
   text-decoration: none;
+  border: none;
 }
 
 /* ------- TermInfo view ------- */
@@ -218,7 +222,6 @@ select::-ms-expand {
 .taxonomy_container .newSearch input {
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   display: inline-block;
-  /* vertical-align: top; */
   margin-left: 5px;
   margin-top: 0;
   border: 2px solid #757575;
@@ -238,8 +241,7 @@ select::-ms-expand {
   display: inline-block;
   vertical-align: top;
   font-size: 16px;
-  /* line-height: 28px; */
-  height: 34px;
+  height: 28px;
   padding-left: 5px;
   padding-right: 5px;
   margin-left: 5px;

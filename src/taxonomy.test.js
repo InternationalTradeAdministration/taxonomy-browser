@@ -81,7 +81,7 @@ test('user can search based on a selected category', async () => {
   const usedFor = '.taxonomy_container div.termInfo > ul > li';
   await page.waitForSelector(usedFor, 10000);
   const conceptGroupText = await page.$eval(usedFor, e => e.innerHTML);
-  expect(conceptGroupText).toBe('Air Traffic Management Equipment');
+  expect(conceptGroupText).toBe('Film Post-Production Equipment');
   const ITA_home = '.taxonomy_container .breadcrumbs > h3 > a';
   await page.waitForSelector(ITA_home, 10000);
   await page.click(ITA_home);

@@ -111,10 +111,10 @@ class SearchBar extends Component {
         <div className="categoryList">
           <p><b>Browse By: </b></p>
           <ul>
-            <li><Link to={{pathname: "/id/RCM1PE2jExQ27PUY0a2WdxD"}}>Geographic Locations</Link></li>
-            <li><Link to={{pathname: "/id/R79uIjoQaQ9KzvJfyB1H7Ru"}}>Industries</Link></li>
-            <li><Link to={{pathname: "/id/RBBed4Voz7iS3nUECA3yzNM"}}>Trade Topics</Link></li>
-            <li><Link to={{pathname: "/id/RBqqOvJ9rXMcmc5SDhGjWTp"}}>U.S. Government</Link></li>
+            <li><Link to={{pathname: "/#id/RCM1PE2jExQ27PUY0a2WdxD"}}>Geographic Locations</Link></li>
+            <li><Link to={{pathname: "/#id/R79uIjoQaQ9KzvJfyB1H7Ru"}}>Industries</Link></li>
+            <li><Link to={{pathname: "/#id/RBBed4Voz7iS3nUECA3yzNM"}}>Trade Topics</Link></li>
+            <li><Link to={{pathname: "/#id/RBqqOvJ9rXMcmc5SDhGjWTp"}}>U.S. Government</Link></li>
           </ul>
         </div>
 

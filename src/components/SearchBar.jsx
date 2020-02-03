@@ -47,9 +47,11 @@ class SearchBar extends Component {
   retrieveSuggestions(value) {
     this.setState({autosuggestions: []});
     let searchUrl = (
-      `${this.props.BASE_URL}/ita_taxonomies/search?api_key=${this.props.API_KEY}&q=${value}&types=${this.state.selectedTopic}`
+      `${this.props.BASE_URL}/ita_taxonomies/search?q=${value}&types=${this.state.selectedTopic}`
     );
-    fetch(searchUrl)
+    fetch(searchUrl, {
+      headers: { 'Authorization': 'Bearer ' + this.props.ACCESS_TOKEN }
+    })
     .then(response => response.json())
     .then(response => this.setState({autosuggestions: response.results}))
   }

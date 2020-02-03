@@ -27,12 +27,14 @@ class TermInfo extends Component {
 
   targetUrl = () => {
     const id =  this.props.match.params.id;
-    // console.log(`fetching from: ${this.props.BASE_URL}/ita_taxonomies/${id}?api_key=${this.props.API_KEY}`);
-    return `${this.props.BASE_URL}/ita_taxonomies/${id}?api_key=${this.props.API_KEY}`;
+    // console.log(`fetching from: ${this.props.BASE_URL}/ita_taxonomies/${id}`);
+    return `${this.props.BASE_URL}/ita_taxonomies/${id}`;
   };
 
   fetchData = () => {
-    fetch(this.targetUrl())
+    fetch(this.targetUrl(), {
+      headers: { 'Authorization': 'Bearer ' + this.props.ACCESS_TOKEN }
+    })
       .then(response => response.json())
       .then(response => this.setState({item: response, loading: false}))
       .catch(error => console.log(error), (error) => {

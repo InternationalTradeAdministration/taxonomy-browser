@@ -1,10 +1,10 @@
 self.__precacheManifest = [
   {
-    "revision": "bbde8b19f4cd58b5c6fd",
+    "revision": "820ea4c245d3f62059a2",
     "url": "./static/css/taxonomy-browser.css"
   },
   {
-    "revision": "bbde8b19f4cd58b5c6fd",
+    "revision": "820ea4c245d3f62059a2",
     "url": "./static/js/taxonomy-browser.js"
   },
   {
@@ -16,11 +16,7 @@ self.__precacheManifest = [
     "url": "./static/media/download.a6483469.svg"
   },
   {
-    "revision": "d8d309bbb8600a704d99ee33ccd76144",
-    "url": "./static/media/open_in_new.d8d309bb.svg"
-  },
-  {
-    "revision": "92afbe17d59f0b71b4fe8f1a2f39722b",
+    "revision": "798b7600bb912767a58ef102630ee506",
     "url": "./index.html"
   }
 ];

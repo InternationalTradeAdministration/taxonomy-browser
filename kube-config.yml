@@ -1,0 +1,62 @@
+kind: Deployment
+apiVersion: apps/v1beta1
+metadata:
+  name: ita-taxonomy-browser
+  namespace: mdsnamespace
+  labels:
+    app: ita-taxonomy-browser
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate: 
+      maxSurge: 1 
+      maxUnavailable: 1 
+  minReadySeconds: 5  
+  template:
+    metadata:
+      labels:
+        app: ita-taxonomy-browser
+    spec:
+      containers:
+      - name: ita-taxonomy-browser
+        image: dataservices.azurecr.io/ita-taxonomy-browser:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+      restartPolicy: Always
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: ita-taxonomy-browser
+  namespace: mdsnamespace
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 80
+  selector:
+    app: ita-taxonomy-browser
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  name: ita-taxonomy-browser
+  namespace: mdsnamespace
+spec:
+  rules:
+    - host: taxonomy-browser-itadev2.vangos-cloudapp.us
+      http:
+        paths:
+          - backend:
+              serviceName: ita-taxonomy-browser
+              servicePort: 80
+            path: /
+  tls:
+      - hosts:
+          - taxonomy-browser-itadev2.vangos-cloudapp.us
+        secretName: tls-secret

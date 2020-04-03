@@ -3,8 +3,6 @@ apiVersion: apps/v1beta1
 metadata:
   name: ita-taxonomy-browser
   namespace: mdsnamespace
-  labels:
-    app: ita-taxonomy-browser
 spec:
   replicas: 1
   strategy:
@@ -19,7 +17,7 @@ spec:
     spec:
       containers:
       - name: ita-taxonomy-browser
-        image: dataservices.azurecr.io/ita-taxonomy-browser:latest
+        image: itadevacr.azurecr.io/ita-taxonomy-browser/web:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80

@@ -1,0 +1,7 @@
+version: '3'
+services:
+  ita-taxonomy-browser:
+    image: itadevacr.azurecr.io/ita-taxonomy-browser/web:latest
+    build:
+      context: .
+      dockerfile: Dockerfile

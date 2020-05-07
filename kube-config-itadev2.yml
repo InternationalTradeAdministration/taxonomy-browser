@@ -47,7 +47,7 @@ metadata:
   namespace: mdsnamespace
 spec:
   rules:
-    - host: taxonomy-browser-itadev2.vangos-cloudapp.us
+    - host: taxonomy-browser-dev.trade.gov
       http:
         paths:
           - backend:
@@ -55,6 +55,4 @@ spec:
               servicePort: 80
             path: /
   tls:
-      - hosts:
-          - taxonomy-browser-itadev2.vangos-cloudapp.us
-        secretName: tls-secret
+      - secretName: trade-gov-tls-secret

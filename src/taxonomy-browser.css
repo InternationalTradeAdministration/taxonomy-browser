@@ -6,7 +6,7 @@
   padding-right: 20px;
   padding-left: 20px;
   margin-bottom: 3em;
-  width: 1040px;
+  max-width: 1040px;
 }
 
 /* Four Style Sections: Start (Thesauri), Resultslist, TermInfo, Footer */

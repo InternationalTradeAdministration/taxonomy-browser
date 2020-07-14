@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom'; 
 import arrow from '../images/Right_Arrow.png';
 import FloatingSearchBox from './FloatingSearchBox';
-import Footer from './Footer';
 import Loader from 'react-loader-spinner';
 import topics from '../topics';
 
@@ -199,9 +198,6 @@ class TermInfo extends Component {
               ) : null }
 
             </div>
-
-            <hr/>
-            <Footer />
           </>
         )}
       </div>

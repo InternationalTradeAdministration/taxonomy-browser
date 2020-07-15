@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import Autocomplete from 'react-autocomplete';
-import Footer from './Footer';
 import '../taxonomy-browser.css';
 
 class SearchBar extends Component {
@@ -118,7 +117,6 @@ class SearchBar extends Component {
           </ul>
         </div>
 
-        <Footer/>
       </div>
     )
   }

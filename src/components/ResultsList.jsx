@@ -3,7 +3,6 @@ import { Link, withRouter } from 'react-router-dom';
 import Pagination from 'react-js-pagination';
 import Loader from 'react-loader-spinner';
 import FloatingSearchBox from './FloatingSearchBox';
-import Footer from './Footer';
 
 class ResultsList extends Component {
   constructor(props) {
@@ -110,8 +109,6 @@ class ResultsList extends Component {
             onChange={(pageNumber) => this.handlePageChange(pageNumber)}
           />
         ) : null }
-        <br />
-        <Footer/>
       </div>
     );
   }

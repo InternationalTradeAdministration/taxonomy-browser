@@ -12,7 +12,7 @@ beforeAll(async () => {
   });
   page = await browser.newPage();
   await page.goto('http://localhost:3000')
-  // await page.setViewport({ width: 1040, height: 500});
+  // await page.setViewport({ width: 1040, height: 2000});
 });
 
 test('main title is present', async () => {
@@ -78,10 +78,10 @@ test('user can search based on a selected category', async () => {
   // await page.screenshot({path: 'screenshot.png'})
   const termInfoLabel2 = '.taxonomy_container .breadcrumbs h3:nth-of-type(3)';
   await page.waitForSelector(termInfoLabel2, 20000);
-  const usedFor = '.taxonomy_container div.termInfo > ul > li';
+  const usedFor = '.taxonomy_container div.termRelation > div.broader > ul > li';
   await page.waitForSelector(usedFor, 10000);
-  const conceptGroupText = await page.$eval(usedFor, e => e.innerHTML);
-  expect(conceptGroupText).toBe('Film Post-Production Equipment');
+  const conceptGroupText = await page.$eval(usedFor, e => e.innerText);
+  expect(conceptGroupText).toBe('Tour Operators');
   const ITA_home = '.taxonomy_container .breadcrumbs > h3 > a';
   await page.waitForSelector(ITA_home, 10000);
   await page.click(ITA_home);

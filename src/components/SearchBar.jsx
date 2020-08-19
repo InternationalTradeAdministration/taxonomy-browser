@@ -105,6 +105,7 @@ class SearchBar extends Component {
             onSelect={this.onSelectSuggestion}
           />
           <button type="submit" aria-label="submit">Search</button>
+          <p>test</p>
         </form>
 
         <div className="categoryList">

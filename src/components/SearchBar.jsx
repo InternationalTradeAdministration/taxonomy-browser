@@ -33,7 +33,7 @@ class SearchBar extends Component {
 
   initiateSuggestions = () => {
     if (this.state.queryString.length > 1) {
-      this.retrieveSuggestions(this.state.queryString);
+      // this.retrieveSuggestions(this.state.queryString);
     } else {
       this.setState({ autosuggestions: [] })
     }
@@ -46,11 +46,11 @@ class SearchBar extends Component {
   retrieveSuggestions(value) {
     this.setState({autosuggestions: []});
     let searchUrl = (
-      `${this.props.BASE_URL}/ita_taxonomies/search?api_key=${this.props.API_KEY}&q=${value}&types=${this.state.selectedTopic}`
+      `${this.props.BASE_URL}/ita_taxonomies/v1/search?subscription-key=${this.props.API_KEY}&q=${encodeURIComponent(value)}&types=${this.state.selectedTopic}`
     );
-    fetch(searchUrl)
-    .then(response => response.json())
-    .then(response => this.setState({autosuggestions: response.results}))
+    // fetch(searchUrl)
+    // .then(response => response.json())
+    // .then(response => this.setState({autosuggestions: response.results}))
   }
 
   getItemValue(item) {
@@ -64,12 +64,12 @@ class SearchBar extends Component {
           {item.label}
         </Link>
       </div>
-    ); 
+    );
   };
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.history.push({pathname: `/search`, search: `&types=${this.state.selectedTopic}&q=${this.state.queryString}`});
+    this.props.history.push({pathname: `/search`, search: `&types=${this.state.selectedTopic}&q=${encodeURIComponent(this.state.queryString)}`});
   }
 
   render() {
@@ -79,15 +79,16 @@ class SearchBar extends Component {
         <p>The International Trade Administration’s (ITA) Thesaurus of International Trade Terms is a controlled and structured list of words and phrases used to tag and index information found on the ITA’s websites and databases. The thesaurus covers all subjects related to international trade and foreign investment with particular emphasis on exporting, trade promotion, market access and enforcement and compliance.</p>
 
         <form onSubmit={this.handleSubmit} className="center taxonomy-search-form">
-          <label aria-label="Select a Category">
-            <select value={this.state.selectedTopic} onChange={this.handleChangeTopic} className="dropdown">
-              <option value="">All Categories</option>
-              <option value="Geographic Locations">Geographic Locations</option>
-              <option value="Industries">Industries</option>
-              <option value="Trade Topics">Trade Topics</option>
-              <option value="U.S. Government">U.S. Government</option>
-            </select>
-          </label>
+          {/*<label aria-label="Select a Category">*/}
+          {/*  <select value={this.state.selectedTopic} onChange={this.handleChangeTopic} className="dropdown">*/}
+          {/*    <option value="">All Categories</option>*/}
+          {/*    <option value="Geographic Locations">Geographic Locations</option>*/}
+          {/*    <option value="Industries">Industries</option>*/}
+          {/*    <option value="Trade Topics">Trade Topics</option>*/}
+          {/*    <option value="U.S. Government">U.S. Government</option>*/}
+          {/*  </select>*/}
+          {/*</label>*/}
+
           <Autocomplete
             inputProps = {{
               type: 'text',
@@ -98,14 +99,16 @@ class SearchBar extends Component {
             }}
             autoHighlight={false}
             value={this.state.queryString}
-            items={this.state.autosuggestions} 
+            items={this.state.autosuggestions}
             getItemValue={this.getItemValue}
             renderItem={this.renderItem}
             onChange={this.handleChange}
             onSelect={this.onSelectSuggestion}
           />
+
           <button type="submit" aria-label="submit">Search</button>
         </form>
+
 
         <div className="categoryList">
           <p><b>Browse By: </b></p>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom'; 
+import { Link, withRouter } from 'react-router-dom';
 import arrow from '../images/Right_Arrow.png';
 import FloatingSearchBox from './FloatingSearchBox';
 import Loader from 'react-loader-spinner';
@@ -12,11 +12,11 @@ class TermInfo extends Component {
       item: {
         type: [],
         annotations: {},
-        object_properties: { 
+        object_properties: {
           member_of: [{}], has_member: [{}], main_concept_of: [{}], has_main_concept: [{}],
-          has_related: [{}], has_broader: [{}], has_narrower: [{}], 
-          is_in_scheme: [{}], is_top_concept_in_scheme: [{}], micro_thesaurus_of: [{}], 
-          sub_group: [{}], super_group: [{}], "iso_thes:super_group": [{}] 
+          has_related: [{}], has_broader: [{}], has_narrower: [{}],
+          is_in_scheme: [{}], is_top_concept_in_scheme: [{}], micro_thesaurus_of: [{}],
+          sub_group: [{}], super_group: [{}], iso_thes_super_group: [{}]
         },
       },
       errorMessage: "",
@@ -27,13 +27,32 @@ class TermInfo extends Component {
   targetUrl = () => {
     const id =  this.props.match.params.id;
     // console.log(`fetching from: ${this.props.BASE_URL}/ita_taxonomies/${id}?api_key=${this.props.API_KEY}`);
-    return `${this.props.BASE_URL}/ita_taxonomies/${id}?api_key=${this.props.API_KEY}`;
+    return `${this.props.BASE_URL}/ita_taxonomies/v1/show/${id}?subscription-key=${this.props.API_KEY}`;
   };
+
+  normalizeResult = (result) => {
+    const annotationPropertyEntries = result.annotation_properties.map(property => {
+      return [property.property_type, property.values]
+    })
+
+    const annotations = Object.fromEntries(annotationPropertyEntries)
+
+    const objectPropertyEntries = result.object_properties.map(property => {
+      return [property.property_type, property.values]
+    })
+
+    const object_properties = Object.fromEntries(objectPropertyEntries)
+
+    result.type = 'N/A'
+    result.annotations = annotations
+    result.object_properties = object_properties
+    return result
+  }
 
   fetchData = () => {
     fetch(this.targetUrl())
       .then(response => response.json())
-      .then(response => this.setState({item: response, loading: false}))
+      .then(response => this.setState({item: this.normalizeResult(response), loading: false}))
       .catch(error => console.log(error), (error) => {
         this.setState({errorMessage: error, loading: false});
       })
@@ -65,7 +84,7 @@ class TermInfo extends Component {
           if (a.label.toLowerCase() > b.label.toLowerCase()) { return 1 }
           return 0;
         }).map((t, i) => {
-          return <li key={i}><Link to={{pathname: `/id/${t.id}`}}>{t.label}</Link></li>          
+          return <li key={i}><Link to={{pathname: `/id/${t.id}`}}>{t.label}</Link></li>
         })
       } else return null
     };
@@ -77,7 +96,7 @@ class TermInfo extends Component {
         return item.label
       }
     }
-  
+
     const topConcepts = () => {
       if (object_properties.has_main_concept) {
         return sortedTerms(object_properties.has_main_concept)
@@ -97,13 +116,13 @@ class TermInfo extends Component {
     return (
       <div>
         <FloatingSearchBox BASE_URL={this.props.BASE_URL} API_KEY={this.props.API_KEY}/>
-        
+
         { this.state.loading ? (<div className="spinner"><Loader type="ThreeDots" color="#00CC66" width="100"/></div>) : (
           <>
             <div className="breadcrumbs">
               <h3><Link to={{pathname: `/`}}>ITA Thesaurus</Link> > </h3>
 
-              {!!(type[0]) ? (<h3><Link to={{pathname: `/id/${topics[type[0]].id}`}}>{type[0]}</Link> > </h3>) : null}
+              {/*{!!(type[0]) ? (<h3><Link to={{pathname: `/id/${topics[type[0]].id}`}}>{type[0]}</Link> > </h3>) : null}*/}
 
               <h3>{termLabel(this.state.item)}</h3>
             </div>
@@ -117,7 +136,7 @@ class TermInfo extends Component {
                   {annotations.definition.map((t, i) => <p key={i}>{t}</p>)}
                 </>
               ) : null }
-              
+
               { annotations.scope_note ? (
                 <>
                   <h4>Scope Note</h4>
@@ -139,10 +158,10 @@ class TermInfo extends Component {
                 </>
               ) : null }
 
-              { object_properties["iso_thes:super_group"] ? (
+              { object_properties.iso_thes_super_group ? (
                 <>
                   <h4>Member of Concept Group</h4>
-                  <ul>{sortedTerms(object_properties["iso_thes:super_group"])}</ul>
+                  <ul>{sortedTerms(object_properties.iso_thes_super_group)}</ul>
                 </>
               ) : null }
 

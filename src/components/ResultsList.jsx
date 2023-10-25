@@ -10,7 +10,7 @@ class ResultsList extends Component {
     this.state = {
       numberOfResults: 0,
       activePage: 1,
-      itemsPerPage: 20,
+      itemsPerPage: 10,
       results: [],
       footerData: {},
       errorMessage: '',
@@ -20,17 +20,49 @@ class ResultsList extends Component {
 
   searchUrl = () =>  {
     const size = this.state.itemsPerPage;
-    const searchParams = this.props.location.search;
-    return `${this.props.BASE_URL}/ita_taxonomies/search?api_key=${this.props.API_KEY}&size=${size}${searchParams}&offset=${(this.state.activePage-1)*(size)}`
+    const currentParams = new URLSearchParams(decodeURI(this.props.location.search));
+    const searchParams = {
+      size: size,
+      offset: (this.state.activePage-1)*(size),
+      q: currentParams.get('q'),
+      types: currentParams.get('types')
+    }
+    const searchParamsString = Object.entries(searchParams).map(([key, value]) => {
+      return `${key}=${encodeURIComponent(value)}`
+    }).join('&')
+    return `${this.props.BASE_URL}/ita_taxonomies/v1/search?subscription-key=${this.props.API_KEY}&${searchParamsString}`
 
   };
+
+  normalizeResult = (result) => {
+    const annotationPropertyEntries = result.annotation_properties.map(property => {
+      return [property.property_type, property.values]
+    })
+
+    const annotations = Object.fromEntries(annotationPropertyEntries)
+
+    const objectPropertyEntries = result.object_properties.map(property => {
+      return [property.property_type, property.values]
+    })
+
+    const object_properties = Object.fromEntries(objectPropertyEntries)
+
+    result.type = 'N/A'
+    result.annotations = annotations
+    result.object_properties = object_properties
+    return result
+  }
+
+  normalizeResults = (results) => {
+    return results.map(result => this.normalizeResult(result))
+  }
 
   fetchResults = () => {
     // console.log("ResultsList fetched from: " + this.searchUrl());
     this.setState({loading: true}, () => {
       fetch(this.searchUrl())
       .then(response => response.json())
-      .then(response => this.setState({ results: response.results, footerData: response, numberOfResults: response.total, offset: response.offset, loading: false }))
+      .then(response => this.setState({ results: this.normalizeResults(response.results), footerData: response, numberOfResults: response.total, offset: response.offset, loading: false }))
       .catch(error => console.log(error), (error) => {
         this.setState({errorMessage: error, loading: false});
       })
@@ -52,7 +84,8 @@ class ResultsList extends Component {
   };
 
   itemType(item) {
-    if (item.type.length > 0) {return (`${item.type[0]} > `)}
+    // if (item.type.length > 0) {return (`${item.type[0]} > `)}
+    return null
   }
 
   termLabel(item) {
@@ -74,7 +107,7 @@ class ResultsList extends Component {
   };
 
   render() {
-  
+
     return (
       <div className="resultsList">
         <FloatingSearchBox BASE_URL={this.props.BASE_URL} API_KEY={this.props.API_KEY}/>
@@ -98,7 +131,7 @@ class ResultsList extends Component {
           </ul>
         )}
         { (this.state.numberOfResults > 0) ? (
-          <Pagination 
+          <Pagination
             activePage={this.state.activePage}
             totalItemsCount={this.state.numberOfResults}
             itemsCountPerPage={this.state.itemsPerPage}

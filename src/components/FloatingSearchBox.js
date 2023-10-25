@@ -37,11 +37,11 @@ class FloatingSearchBox extends Component {
   retrieveSuggestions(value) {
     this.setState({autosuggestions: []});
     let searchUrl = (
-      `${this.props.BASE_URL}/ita_taxonomies/search?api_key=${this.props.API_KEY}&q=${value}&types=`
+      `${this.props.BASE_URL}/ita_taxonomies/v1/search?subscription-key=${this.props.API_KEY}&q=${encodeURIComponent(value)}&types=`
     );
-    fetch(searchUrl)
-    .then(response => response.json())
-    .then(response => this.setState({autosuggestions: response.results}))
+    // fetch(searchUrl)
+    // .then(response => response.json())
+    // .then(response => this.setState({autosuggestions: response.results}))
   }
 
   getItemValue(item) {
@@ -55,7 +55,7 @@ class FloatingSearchBox extends Component {
           {item.label}
         </Link>
       </div>
-    ); 
+    );
   };
 
   render() {
@@ -71,13 +71,13 @@ class FloatingSearchBox extends Component {
           }}
           autoHighlight={false}
           value={this.state.queryString}
-          items={this.state.autosuggestions} 
+          items={this.state.autosuggestions}
           getItemValue={this.getItemValue}
           renderItem={this.renderItem}
           onChange={this.handleChange}
           onSelect={this.onSelectSuggestion}
         />
-        <Link to={{pathname: `/search`, search: `&q=${this.state.queryString}&types=`}} >
+        <Link to={{pathname: `/search`, search: `&q=${encodeURIComponent(this.state.queryString)}&types=`}} >
           <button>Search</button>
         </Link>
       </form>

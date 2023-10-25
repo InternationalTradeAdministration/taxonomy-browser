@@ -6,14 +6,14 @@ import { HashRouter } from 'react-router-dom';
 import './taxonomy-browser.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
- 
-function renderTaxonomy(BASE_URL, API_KEY, divID) {
+
+function renderTaxonomy(baseUrl, subscriptionKey, divId) {
   ReactDOM.render(
     <HashRouter hashType="noslash">
-      <App BASE_URL={BASE_URL} API_KEY={API_KEY}/>
+      <App BASE_URL={baseUrl} API_KEY={subscriptionKey}/>
     </HashRouter>,
-    document.getElementById(divID)
-  );  
+    document.getElementById(divId)
+  );
 }
 
 export default renderTaxonomy;

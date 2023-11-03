@@ -10,7 +10,7 @@
     <title>Taxonomy Browser</title>
 
     <link type="text/css" rel="stylesheet" href="APIstoreTemplate_files/bootstrap.css">
-    <link type="text/css" rel="stylesheet" href="APIstoreTemplate_files/theme-wso2.css">
+<!--    <link type="text/css" rel="stylesheet" href="APIstoreTemplate_files/theme-wso2.css">-->
     <link type="text/css" rel="stylesheet" href="APIstoreTemplate_files/font-wso2.css">
     <link type="text/css" rel="stylesheet" href="APIstoreTemplate_files/font-awesome.css">
     <link type="text/css" rel="stylesheet" href="APIstoreTemplate_files/bootstrap-select.css">
@@ -23,40 +23,43 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function() {
-        var BASE_URL = "https://data.mds.dev2.trade.gov";
-        var API_KEY = "c142487acfad44c3ad186553bd147baf";  // for api.trade.gov
-
-        var divID = "taxonomy_container";
-        window.Explorer.renderTaxonomy(BASE_URL, API_KEY, divID);
+        const divID = "taxonomy_container";
+        window.Explorer.renderTaxonomy("taxonomy_container");
       });
     </script>
 
     <script type="text/javascript" src="APIstoreTemplate_files/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="APIstoreTemplate_files/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="APIstoreTemplate_files/js/theme-wso2.js"></script>
+<!--    <script type="text/javascript" src="APIstoreTemplate_files/js/theme-wso2.js"></script>-->
 
 </head>
-<body class="sticky-footer">
+<!--<body class="sticky-footer">-->
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div id="taxonomy_container"></div>
+    </div>
+</div>
 
 <!-- #page-content-wrapper -->
-<div class="page-content-wrapper">
-    <!-- media-->
-    <div class="media">
-        <!-- Page Content -->
+<!--<div class="page-content-wrapper">-->
+<!--    &lt;!&ndash; media&ndash;&gt;-->
+<!--    <div class="media">-->
+<!--        &lt;!&ndash; Page Content &ndash;&gt;-->
 
 
-        <!-- media body-->
-        <div class="media-body">
-            <div class="container-fluid">
-                <div class="body-wrapper">
+<!--        &lt;!&ndash; media body&ndash;&gt;-->
+<!--        <div class="media-body">-->
+<!--            <div class="container-fluid">-->
+<!--                <div class="body-wrapper">-->
 
 
-<!-- <div class="page-header"> -->
-  <div id="taxonomy_container"></div>
+<!--&lt;!&ndash; <div class="page-header"> &ndash;&gt;-->
 
-                </div>
-            </div>
-        </div><!-- /#media body-->
-    </div><!-- /#media-->
-</div><!-- /#page-content-wrapper -->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>&lt;!&ndash; /#media body&ndash;&gt;-->
+<!--    </div>&lt;!&ndash; /#media&ndash;&gt;-->
+<!--</div>&lt;!&ndash; /#page-content-wrapper &ndash;&gt;-->
+
 </body></html>

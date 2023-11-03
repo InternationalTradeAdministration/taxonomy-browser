@@ -112,7 +112,7 @@ class ResultsList extends Component {
       <div className="resultsList">
         <FloatingSearchBox BASE_URL={this.props.BASE_URL} API_KEY={this.props.API_KEY}/>
 
-        <h1>Search Results</h1>
+        <h1><Link to={{pathname: `/`}}>ITA Thesaurus</Link> > Search results</h1>
         <p><b>{this.state.numberOfResults} results:</b></p>
 
         {(this.state.loading) ? (

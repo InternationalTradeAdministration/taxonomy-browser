@@ -7,10 +7,10 @@ import './taxonomy-browser.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 
-function renderTaxonomy(baseUrl, subscriptionKey, divId) {
+function renderTaxonomy(divId) {
   ReactDOM.render(
     <HashRouter hashType="noslash">
-      <App BASE_URL={baseUrl} API_KEY={subscriptionKey}/>
+      <App BASE_URL={process.env.REACT_APP_API_URL} API_KEY={process.env.REACT_APP_SUBSCRIPTION_KEY}/>
     </HashRouter>,
     document.getElementById(divId)
   );

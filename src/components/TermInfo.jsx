@@ -10,7 +10,7 @@ class TermInfo extends Component {
     super(props)
     this.state = {
       item: {
-        type: [],
+        types: [],
         annotations: {},
         object_properties: {
           member_of: [{}], has_member: [{}], main_concept_of: [{}], has_main_concept: [{}],
@@ -72,7 +72,7 @@ class TermInfo extends Component {
 
   render() {
     const {
-      type,
+      types,
       annotations,
       object_properties,
     } = this.state.item;
@@ -88,6 +88,14 @@ class TermInfo extends Component {
         })
       } else return null
     };
+
+    const termTypes = (values) => {
+      if (values) {
+        return values.map(value => {
+          return <li key={value}>{value}</li>
+        })
+      } else return null
+    }
 
     const termLabel = (item) => {
       if (item.annotations.pref_label) {
@@ -122,14 +130,20 @@ class TermInfo extends Component {
             <div className="breadcrumbs">
               <h3><Link to={{pathname: `/`}}>ITA Thesaurus</Link> > </h3>
 
-              {/*{!!(type[0]) ? (<h3><Link to={{pathname: `/id/${topics[type[0]].id}`}}>{type[0]}</Link> > </h3>) : null}*/}
-
               <h3>{termLabel(this.state.item)}</h3>
             </div>
 
             <h1>{termLabel(this.state.item)}</h1>
 
             <div className="termInfo">
+
+              { (types.length > 0) ? (
+                <>
+                  <h4>Types</h4>
+                <ul>{termTypes(types)}</ul>
+                </>
+              ) : null }
+
               { annotations.definition ? (
                 <>
                   <h4>Description</h4>

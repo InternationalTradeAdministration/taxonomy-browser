@@ -26,14 +26,14 @@ class SearchBar extends Component {
   };
 
   handleChangeTopic(e) {
-    this.setState({selectedTopic: e.target.value}, () => {
+    this.setState({selectedTopic: e.target.value, autosuggestions: []}, () => {
       return this.initiateSuggestions;
     });
   };
 
   initiateSuggestions = () => {
     if (this.state.queryString.length > 1) {
-      // this.retrieveSuggestions(this.state.queryString);
+      this.retrieveSuggestions(this.state.queryString);
     } else {
       this.setState({ autosuggestions: [] })
     }
@@ -46,11 +46,11 @@ class SearchBar extends Component {
   retrieveSuggestions(value) {
     this.setState({autosuggestions: []});
     let searchUrl = (
-      `${this.props.BASE_URL}/ita_taxonomies/v1/search?subscription-key=${this.props.API_KEY}&q=${encodeURIComponent(value)}&types=${this.state.selectedTopic}`
+      `${this.props.BASE_URL}/ita_taxonomies/v1/suggest?subscription-key=${this.props.API_KEY}&q=${encodeURIComponent(value)}&types=${encodeURIComponent(this.state.selectedTopic)}`
     );
-    // fetch(searchUrl)
-    // .then(response => response.json())
-    // .then(response => this.setState({autosuggestions: response.results}))
+    fetch(searchUrl)
+    .then(response => response.json())
+    .then(response => this.setState({autosuggestions: response.results}))
   }
 
   getItemValue(item) {
@@ -59,7 +59,7 @@ class SearchBar extends Component {
 
   renderItem(item, isHighlighted){
     return (
-      <div key={item.id} style={{ background: isHighlighted ? 'lightblue' : 'white', textAlign: 'left', 'paddingTop': '5px', 'paddingBottom': '5px' }}>
+      <div key={item.id} style={{ background: isHighlighted ? 'lightblue' : 'white', textAlign: 'left', 'padding': '5px' }}>
         <Link to={{pathname: `/id/${item.id}`, state: {pageId: item.id}}} style={{ 'textDecoration': 'none', 'color': '#292a2b', 'fontSize': '11.5pt' }}>
           {item.label}
         </Link>
@@ -69,25 +69,27 @@ class SearchBar extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.history.push({pathname: `/search`, search: `&types=${this.state.selectedTopic}&q=${encodeURIComponent(this.state.queryString)}`});
+    if (this.state.queryString.trim().length > 0 || this.state.selectedTopic.trim().length > 0) {
+      this.props.history.push({pathname: `/search`, search: `&types=${this.state.selectedTopic}&q=${encodeURIComponent(this.state.queryString)}`});
+    }
   }
 
   render() {
     return (
       <div>
-        <h1>Thesaurus of International Trade Terms</h1>
-        <p>The International Trade Administration’s (ITA) Thesaurus of International Trade Terms is a controlled and structured list of words and phrases used to tag and index information found on the ITA’s websites and databases. The thesaurus covers all subjects related to international trade and foreign investment with particular emphasis on exporting, trade promotion, market access and enforcement and compliance.</p>
+        {/*<h1>Thesaurus of International Trade Terms</h1>*/}
+        {/*<p>The International Trade Administration’s (ITA) Thesaurus of International Trade Terms is a controlled and structured list of words and phrases used to tag and index information found on the ITA’s websites and databases. The thesaurus covers all subjects related to international trade and foreign investment with particular emphasis on exporting, trade promotion, market access and enforcement and compliance.</p>*/}
 
         <form onSubmit={this.handleSubmit} className="center taxonomy-search-form">
-          {/*<label aria-label="Select a Category">*/}
-          {/*  <select value={this.state.selectedTopic} onChange={this.handleChangeTopic} className="dropdown">*/}
-          {/*    <option value="">All Categories</option>*/}
-          {/*    <option value="Geographic Locations">Geographic Locations</option>*/}
-          {/*    <option value="Industries">Industries</option>*/}
-          {/*    <option value="Trade Topics">Trade Topics</option>*/}
-          {/*    <option value="U.S. Government">U.S. Government</option>*/}
-          {/*  </select>*/}
-          {/*</label>*/}
+          <label aria-label="Select a Category" className="category">
+            <select value={this.state.selectedTopic} onChange={this.handleChangeTopic} className="dropdown">
+              <option value="">All Categories</option>
+              <option value="Geographic Locations">Geographic Locations</option>
+              <option value="Industries">Industries</option>
+              <option value="Trade Topics">Trade Topics</option>
+              <option value="U.S. Government">U.S. Government</option>
+            </select>
+          </label>
 
           <Autocomplete
             inputProps = {{

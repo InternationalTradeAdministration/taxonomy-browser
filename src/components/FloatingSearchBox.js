@@ -15,6 +15,7 @@ class FloatingSearchBox extends Component {
     this.renderItem = this.renderItem.bind(this);
     this.getItemValue = this.getItemValue.bind(this);
     this.retrieveSuggestions = this.retrieveSuggestions.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -23,7 +24,7 @@ class FloatingSearchBox extends Component {
   };
 
   initiateSuggestions = () => {
-    if (this.state.queryString.length > 3) {
+    if (this.state.queryString.length > 1) {
       this.retrieveSuggestions(this.state.queryString);
     } else {
       this.setState({ autosuggestions: [] })
@@ -37,11 +38,11 @@ class FloatingSearchBox extends Component {
   retrieveSuggestions(value) {
     this.setState({autosuggestions: []});
     let searchUrl = (
-      `${this.props.BASE_URL}/ita_taxonomies/v1/search?subscription-key=${this.props.API_KEY}&q=${encodeURIComponent(value)}&types=`
+      `${this.props.BASE_URL}/ita_taxonomies/v1/suggest?subscription-key=${this.props.API_KEY}&q=${encodeURIComponent(value)}&types=`
     );
-    // fetch(searchUrl)
-    // .then(response => response.json())
-    // .then(response => this.setState({autosuggestions: response.results}))
+    fetch(searchUrl)
+    .then(response => response.json())
+    .then(response => this.setState({autosuggestions: response.results}))
   }
 
   getItemValue(item) {
@@ -50,7 +51,7 @@ class FloatingSearchBox extends Component {
 
   renderItem(item, isHighlighted){
     return (
-      <div key={item.id} style={{ background: isHighlighted ? 'lightblue' : 'white', textAlign: 'left', 'paddingTop': '5px', 'paddingBottom': '5px' }}>
+      <div key={item.id} style={{ background: isHighlighted ? 'lightblue' : 'white', textAlign: 'left', 'padding': '5px' }}>
         <Link to={{pathname: `/id/${item.id}`, state: {pageId: item.id}}} style={{ 'textDecoration': 'none', 'color': '#292a2b', 'fontSize': '11.5pt' }}>
           {item.label}
         </Link>
@@ -58,9 +59,16 @@ class FloatingSearchBox extends Component {
     );
   };
 
+  handleSubmit(event) {
+    event.preventDefault();
+    if (this.state.queryString.trim().length > 0) {
+      this.props.history.push({pathname: `/search`, search: `&q=${encodeURIComponent(this.state.queryString)}&types=`});
+    }
+  }
+
   render() {
     return (
-      <form onSubmit={(event) => event.preventDefault()} className="newSearch">
+      <form onSubmit={this.handleSubmit} className="newSearch">
         <Autocomplete
           inputProps = {{
             type: 'text',
@@ -77,9 +85,7 @@ class FloatingSearchBox extends Component {
           onChange={this.handleChange}
           onSelect={this.onSelectSuggestion}
         />
-        <Link to={{pathname: `/search`, search: `&q=${encodeURIComponent(this.state.queryString)}&types=`}} >
-          <button>Search</button>
-        </Link>
+        <button type="submit" aria-label="submit">Search</button>
       </form>
     )
   }

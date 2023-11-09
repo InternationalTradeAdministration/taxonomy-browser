@@ -1,10 +1,10 @@
 self.__precacheManifest = [
   {
-    "revision": "fc6494879655d4202f3e",
+    "revision": "f088aac8fbd075ce873d",
     "url": "./static/css/taxonomy-browser.css"
   },
   {
-    "revision": "fc6494879655d4202f3e",
+    "revision": "f088aac8fbd075ce873d",
     "url": "./static/js/taxonomy-browser.js"
   },
   {
@@ -12,7 +12,7 @@ self.__precacheManifest = [
     "url": "./static/media/dropdown-icon.0dadb5de.svg"
   },
   {
-    "revision": "9c0a5b62e37f3315e757e1f8a53ab773",
+    "revision": "51f2dae86217f2f626c8d6f52c8b886f",
     "url": "./index.html"
   }
 ];
